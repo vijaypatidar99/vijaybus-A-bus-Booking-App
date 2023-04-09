@@ -1,0 +1,25 @@
+
+
+
+
+    <table class="table table-bordered table-striped">   
+        <tr>   
+         <th>Name</th>   
+         <th>Bus Number</th>   
+         <th>Bus Company</th> 
+         <th>Bus seats</th> 
+       
+           
+       </tr>   
+        
+       <% @buses.all.each do |bus| %>   
+           <tr>   
+             <td><%= bus.name %></td>   
+             <td><%= bus.number %></td>   
+             <td><%= bus.company %></td>   
+             <td><%= bus.seats %></td>  
+             <td>  <button type="button" class="btn btn-danger">Danger</button></td>   
+                
+            </tr>   
+       <% end %>   
+     </table> 

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from: MyString
+  to: MyString
+  first_bus: MyString
+  last_bus: MyString
+
+two:
+  from: MyString
+  to: MyString
+  first_bus: MyString
+  last_bus: MyString

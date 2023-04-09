@@ -1,0 +1,22 @@
+<%=render 'shared/slides' %>
+<div class="container text-center">
+    <table class="table table-bordered table-striped">   
+        <tr>   
+         <th>From</th>   
+         <th>Destination</th>   
+         <th>first_bus</th> 
+         <th>last_bus</th>  
+       </tr>   
+        
+       <% @routes.all.each do |route| %>   
+           <tr>   
+             <td><%= route.from %></td>   
+             <td><%= route.to %></td>   
+             <td><%= route.first_bus %></td>   
+             <td><%= route.last_bus %></td> 
+             <td><%= link_to "Book Now" , home_bus_path, class:"btn btn-primary" %></td>  
+             
+            </tr>   
+       <% end %>   
+     </table> 
+    </div>
