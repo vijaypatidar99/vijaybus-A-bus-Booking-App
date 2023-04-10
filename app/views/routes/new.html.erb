@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Add New Route </h1>
+    <%= form_with model: @route, method: :post do |f| %>
+      <%= f.label :from %>
+      <%= f.text_field :from, class: 'form-control' %>
+      <%= f.label :to %>
+      <%= f.text_field :to, class: 'form-control' %>
+      <%= f.label :first_bus %>
+      <%= f.text_field :first_bus, class: 'form-control' %>
+      <%= f.label :last_bus %>
+      <%= f.text_field :last_bus, class: 'form-control' %>
+      <%= f.label :bus_id%>
+      <%= f.text_field :bus_id, class: 'form-control' %>
+      <%= f.submit "Save Bus Route", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

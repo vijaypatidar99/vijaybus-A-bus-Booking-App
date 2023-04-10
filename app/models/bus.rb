@@ -1,3 +1,4 @@
 class Bus < ApplicationRecord
-    validates :name,:number, :company, :seats , presence: true
+  belongs_to :route
+  self.per_page = 4
 end

@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# for i in 4..6
+#     Route.update(bus_id:2)
+# end
+
+# for i in 2..4
+#     Route.update(bus_id:2)
+# end
+# for i in 4..6
+#     Route.update(bus_id:3)
+# end
+
+
+
+

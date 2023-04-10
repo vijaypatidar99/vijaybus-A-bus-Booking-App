@@ -75,3 +75,5 @@ end
 gem 'cssbundling-rails'
 gem 'htmlbeautifier'
 gem "devise" 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'

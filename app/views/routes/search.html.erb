@@ -1,0 +1,10 @@
+<h1>Search Results</h1>
+<% if @buses.try(:any?) %>
+  <ul>
+    <% @buses.each do |bus| %>
+      <li><%= bus.starting_city %> to <%= bus.destination_city %> at <%= bus.departure_time.strftime("%l:%M %p") %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No buses found.</p>
+<% end %>

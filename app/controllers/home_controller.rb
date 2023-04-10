@@ -1,11 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @routes = Route.all
+    @routes = Route.paginate(page: params[:page])
   end
-  def home
-  end
-  
-  def bus
-    @buses = Bus.all
-  end
+
 end

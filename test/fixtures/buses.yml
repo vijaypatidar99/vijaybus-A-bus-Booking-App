@@ -1,13 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  number: 1
-  company: MyString
-  seats: 1
+  starting_city: MyString
+  destination_city: MyString
+  departure_time: 2023-04-10 12:00:48
 
 two:
-  name: MyString
-  number: 1
-  company: MyString
-  seats: 1
+  starting_city: MyString
+  destination_city: MyString
+  departure_time: 2023-04-10 12:00:48

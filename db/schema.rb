@@ -10,14 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_09_103450) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_10_122037) do
   create_table "buses", force: :cascade do |t|
+    t.string "starting_city"
+    t.string "destination_city"
+    t.datetime "departure_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name"
     t.string "number"
     t.string "company"
+    t.integer "price"
     t.integer "seats"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "route_id"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -27,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_103450) do
     t.string "last_bus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bus_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_103450) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

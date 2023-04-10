@@ -1,0 +1,9 @@
+<%= form_tag search_routes_path, method: :get do %>
+  <%= label_tag :from, "From" %>
+  <%= text_field_tag :from %>
+  <%= label_tag :to, "To" %>
+  <%= text_field_tag :to %>
+  <%= label_tag :date, "Date" %>
+  <%= text_field_tag :date, value: Date.today.to_s %>
+  <%= submit_tag "Search" %>
+<% end %>

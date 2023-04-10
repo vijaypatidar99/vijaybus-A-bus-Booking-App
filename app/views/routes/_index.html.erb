@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>From</th>
+        <th>Destination</th>
+        <th>first_bus</th>
+        <th>last_bus</th>
+        <th>Action</th>
+      </tr>
+      <% @routes.each do |route| %>
+        <tr>
+          <td><%= route.from %></td>
+          <td><%= route.to %></td>
+          <td><%= route.first_bus %></td>
+          <td><%= route.last_bus %></td>
+          <td><%= link_to "Book Now" ,route_path(route) , class:"btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <ul class="pagination justify-content-center">
+    <%= will_paginate @routes %>
+  </ul>
+</div>
+</div>
+</div>
