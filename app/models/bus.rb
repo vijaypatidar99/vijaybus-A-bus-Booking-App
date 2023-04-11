@@ -1,4 +1,6 @@
 class Bus < ApplicationRecord
   belongs_to :route
-  self.per_page = 6
+  has_many :tickets, dependent: :destroy
+  self.per_page = 20
+  default_scope -> { order(created_at: :desc) }
 end

@@ -22,15 +22,21 @@ class BusesController < ApplicationController
   def edit
     @bus = Bus.find(params[:id])
   end
-
+  
   def update
     @bus = Bus.find(params[:id])
-    if @Bus.update(bus_params)
+    if @bus.update(bus_params)
       flash[:success] = "Bus updated"
       redirect_to root_path
     else
       render "edit"
     end
+  end
+
+  def destroy
+    Bus.find(params[:id]).destroy
+    flash[:success] = "Bus deleted"
+    redirect_to root_path
   end
 
   private
@@ -40,7 +46,7 @@ class BusesController < ApplicationController
   end
 
   def logged_in_user
-    unless logged_in?
+    unless user_signed_in?
       flash[:danger] = "Please sign up or sign in"
       redirect_to new_user_registration_path
     end

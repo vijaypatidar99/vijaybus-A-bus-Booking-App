@@ -1,0 +1,12 @@
+<h1> Enter Passenger Details </h1>
+<%= form_with model:[@bus, @ticket]  do |f| %>
+  <%= f.label :name, "Enter Passenger Name" %>
+  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.label :age,"Enter Passenger Age" %>
+  <%= f.text_field :age, class: 'form-control' %>
+  <%= f.label :sex,"Enter Passenger Sex (male/female)"%>
+  <%= f.text_field :sex, class: 'form-control' %>
+  <%= f.hidden_field :price, value: @bus.price %>
+  <%= f.hidden_field :bus_id, value: @bus.id %>
+  <%= f.submit "Save Passenger Details", class: "btn btn-primary" %>
+<% end %>
