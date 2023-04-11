@@ -1,0 +1,15 @@
+<%= form_with model: @bus, method: :post do |f| %>
+<%= f.label :name, "Enter Bus Name" %>
+<%= f.text_field :name, class: 'form-control' %>
+<%= f.label :number,"Enter Bus number" %>
+<%= f.text_field :number, class: 'form-control' %>
+<%= f.label :company,"Enter Bus Type" %>
+<%= f.text_field :company, class: 'form-control' %>
+<%= f.label :price, "Enter Bus Fare" %>
+<%= f.text_field :price, class: 'form-control' %>
+<%= f.label :seats, "Enter Available Seats"%>
+<%= f.text_field :seats, class: 'form-control' %>
+<%= f.label :route_id,"Enter Route ID"%>
+<%= f.text_field :route_id, class: 'form-control' %>
+<%= f.submit "Save Bus", class: "btn btn-primary" %>
+<% end %>

@@ -14,8 +14,13 @@
           <td><%= route.to %></td>
           <td><%= route.first_bus %></td>
           <td><%= route.last_bus %></td>
-          <td><%= link_to "Book Now" ,route_path(route) , class:"btn btn-primary" %></td>
-        </tr>
+          <td> <% if current_user.try(:admin?) %>
+              <%=link_to "Update Route", edit_route_path(route), class:"btn btn-primary"%>
+              <%= link_to "Show all Buses" , buses_path , class:"btn btn-primary" %> </td>
+          <%else%>
+            <td><%= link_to "Book Now" ,route_path(route) , class:"btn btn-primary" %></td>
+          </tr>
+        <%end%>
       <% end %>
     </table>
   </div>

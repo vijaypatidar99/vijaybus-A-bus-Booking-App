@@ -1,38 +1,8 @@
 <%=render 'shared/slides' %>
 <%=render 'shared/pagebreaker'%>
-<nav class="navbar navbar-expand-lg bg-light ">
-  <div class="container justify-content-center">
-    <%=render 'routes/form'%>
-  </div>
-</nav>
-<div class="container text-center">
-  <div class="card">
-    <div class="card-body">
-      <table class="table table-bordered table-striped">
-        <tr>
-          <th>From</th>
-          <th>Destination</th>
-          <th>first_bus</th>
-          <th>last_bus</th>
-          <th>Action</th>
-        </tr>
-        <% @routes.all.each do |route| %>
-          <tr>
-            <td><%= route.from %></td>
-            <td><%= route.to %></td>
-            <td><%= route.first_bus %></td>
-            <td><%= route.last_bus %></td>
-            <td><%= link_to "Book Now" ,route_path(route) , class:"btn btn-primary" %></td>
-          </tr>
-        <% end %>
-      </table>
-      <% if current_user.try(:admin?) %>
-        <%=link_to "Add Route", new_route_path, class:"btn btn-primary d-grid gap-2"%>
-      <%end%>
-    </div>
-    <ul class="pagination justify-content-center">
-      <%= will_paginate @routes %>
-    </ul>
-  </div>
-</div>
-</div>
+<% if current_user.try(:admin?) %>
+<%=render 'routes/index'%>
+  <%=render 'adminpage'%>
+<%else%>
+  <%=render 'routes/index'%>
+<%end%>
