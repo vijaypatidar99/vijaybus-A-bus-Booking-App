@@ -1,9 +1,8 @@
-
 <div class="card container">
   <div class="card-body ">
     <table class="table table-bordered table-striped">
       <tr>
-          <th>Route ID</th>
+        <th>Route ID</th>
         <th>Starting From</th>
         <th>Destination</th>
         <th>first_bus</th>
@@ -12,7 +11,7 @@
       </tr>
       <% @routes.each do |route| %>
         <tr>
-           <td><%= route.id %></td>
+          <td><%= route.id %></td>
           <td><%= route.from %></td>
           <td><%= route.to %></td>
           <td><%= route.first_bus %></td>
@@ -20,9 +19,9 @@
           <td> <% if current_user.try(:admin?) %>
               <%=link_to "Update Route", edit_route_path(route), class:"btn btn-primary"%>
               <%=link_to "Delete Route", route_path(route),data: { turbo_method: :delete } ,class:"btn btn-primary"%>
-              <%= link_to "Show all Buses" , route_path(route), class:"btn btn-primary" %> 
-          <%else%>
-         <%= link_to "View Buses" ,route_path(route) , class:"btn btn-primary" %></td>
+              <%= link_to "Show all Buses" , route_path(route), class:"btn btn-primary" %>
+            <%else%>
+              <%= link_to "View Buses" ,route_path(route) , class:"btn btn-primary" %></td>
           </tr>
         <%end%>
       <% end %>

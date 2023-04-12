@@ -15,7 +15,7 @@
     </tr>
     <% @buses.each do |bus| %>
       <tr>
-         <td><%= bus.id %></td>
+        <td><%= bus.id %></td>
         <td><%= bus.name %></td>
         <td><%= bus.number %></td>
         <td><%= bus.bustype %></td>
@@ -24,16 +24,16 @@
         <td><%= bus.pickup %></td>
         <td><%= bus.drop %></td>
         <td> <% if current_user.try(:admin?) %>
-            <%=link_to "Update Bus", edit_bus_path(bus), class:"btn btn-primary"%> 
-             <%=link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%> </td>
+            <%=link_to "Update Bus", edit_bus_path(bus), class:"btn btn-primary"%>
+            <%=link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%> </td>
         <%else%>
           <%=link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%> </td>
-        <%end%>
-      </tr>
-    <% end %>
-  <%else%>
-    <h1>No Bus found in this Route </h1>
-  <%end%>
+      <%end%>
+    </tr>
+  <% end %>
+<%else%>
+  <h1>No Bus found in this Route </h1>
+<%end%>
 </table >
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">

@@ -22,7 +22,7 @@ class BusesController < ApplicationController
   def edit
     @bus = Bus.find(params[:id])
   end
-  
+
   def update
     @bus = Bus.find(params[:id])
     if @bus.update(bus_params)

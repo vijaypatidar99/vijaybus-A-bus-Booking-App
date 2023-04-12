@@ -144,6 +144,10 @@ GEM
     nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pdf-core (0.9.0)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -202,6 +206,7 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.2)
+    ttfunk (1.7.0)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -245,6 +250,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  prawn
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   selenium-webdriver

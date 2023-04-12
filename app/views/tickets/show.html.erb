@@ -1,3 +1,46 @@
-<% @ticket.each do |ticket| %>
-  <%= ticket.user.email %>
+<div class="card text-center">
+  <div class="card-header">
+    <h1>My Tickets</h1>
+  </div>
+  <div class="card-body">
+    <% if @user.tickets.present? %>
+      <h3>Total Tickets - <%= @user.tickets.count %> </h3>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>Ticket ID</th>
+          <th>Passenger Name</th>
+          <th>Passenger Age</th>
+          <th>Passenger Sex</th>
+          <th>Bus fare</th>
+          <th>Pickup Point</th>
+          <th>Drop Point</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+          <th>Actions</th>
+        </tr>
+        <% @ticket.each do |ticket| %>
+          <tr>
+            <td><%= ticket.id %></td>
+            <td><%= ticket.name %></td>
+            <td><%= ticket.age %></td>
+            <td><%= ticket.sex %></td>
+            <td><%= ticket.price %></td>
+            <td><%= ticket.bus.pickup %></td>
+            <td><%= ticket.bus.drop %></td>
+            <td><%= ticket.bus.departure_time %></td>
+            <td><%= ticket.bus.arrival_time %></td>
+          </tr>
+          <%end%>
+        </table >
+         
+      </div>
+      <div class="card-footer text-body-secondary">
+      <%=time = Time.now.to_s
+      time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M")
+      %>
+      </div>
+    </div>
+ 
+<%else%>
+  <p>You have no tickets.</p>
 <%end%>

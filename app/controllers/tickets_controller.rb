@@ -1,23 +1,21 @@
 class TicketsController < ApplicationController
   def show
-    @ticket = Ticket.all
+    @user = current_user
+    @ticket = Ticket.where(user_id: current_user.id)
   end
-def new
-  @bus = Bus.find_by(id: params[:bus_id])
-  @ticket = Ticket.new
-end
-  # def edit
-  #   @bus = Bus.find_by(id: params[:bus_id])
-  #   @ticket = Ticket.new(bus_id: @bus.id)
-  # end
+
+  def new
+    @bus = Bus.find_by(id: params[:bus_id])
+    @ticket = Ticket.new
+  end
 
   def create
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     if @ticket.save
-      flash[:success] = "ticket save Successfully"
+      flash.now[:success] = "ticket save Successfully"
       redirect_to root_path
-    else
+        else
       render "new"
     end
   end
@@ -31,6 +29,17 @@ end
       render "edit"
     end
   end
+
+  def print
+    @ticket = Ticket.find(params[:id])
+    respond_to do |format|
+      format.pdf do
+        pdf = TicketPdf.new(@ticket)
+        send_data pdf.render, filename: "ticket.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
+  end
+
 
   private
 

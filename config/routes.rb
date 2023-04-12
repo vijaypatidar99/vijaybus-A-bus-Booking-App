@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get "ticket/show"
+  get "tickets/user_tickets"
+  get "tickets/show"
+  get "tickets/print"
   devise_for :users
   root "home#index"
   get "routes/index"
@@ -12,4 +14,6 @@ Rails.application.routes.draw do
       get "search"
     end
   end
+  get 'tickets/column/:name', to: 'tickets#print_column'
+
 end
