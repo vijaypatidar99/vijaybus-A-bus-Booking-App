@@ -81,3 +81,4 @@ gem 'prawn'
 
 #to send email
 gem "letter_opener", group: :development
+gem 'pg'
