@@ -20,7 +20,9 @@
       <td><%= bus.pickup %></td>
       <td><%= bus.drop %></td>
       <td> <%=link_to "Update Bus", edit_bus_path(bus), class:"btn btn-primary"%>
-        <%=link_to "Delete Bus",bus_path(bus),data: { turbo_method: :delete } ,class:"btn btn-primary"%></td>
+        <%=link_to "Delete Bus",bus_path(bus),data: { turbo_method: :delete } ,class:"btn btn-primary"%>
+        <%=link_to "Delete Bus",bus_path(bus),data: { turbo_method: :delete } ,class:"btn btn-primary"%>
+       </td>
     </tr>
   <% end %>
 </table >

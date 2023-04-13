@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_110407) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_080356) do
   create_table "buses", force: :cascade do |t|
     t.string "starting_city"
     t.string "destination_city"
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_110407) do
     t.string "sex"
     t.datetime "arrival_time"
     t.datetime "departure_time"
+    t.integer "status"
   end
 
   create_table "users", force: :cascade do |t|

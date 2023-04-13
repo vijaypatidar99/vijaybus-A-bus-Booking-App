@@ -8,7 +8,7 @@
   <%= f.text_field :sex, class: 'form-control' %>
   <%= f.hidden_field :price, value: @bus.price %>
   <%= f.hidden_field :bus_id, value: @bus.id %>
-    <%= f.hidden_field :departure_time, value: @bus.departure_time%>
-      <%= f.hidden_field :arrival_time, value: @bus.arrival_time %>
+  <%= f.hidden_field :departure_time, value: @bus.departure_time%>
+  <%= f.hidden_field :arrival_time, value: @bus.arrival_time %>
   <%= f.submit "Save Passenger Details", class: "btn btn-primary" %>
 <% end %>

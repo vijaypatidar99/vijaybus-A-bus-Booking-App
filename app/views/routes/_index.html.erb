@@ -18,7 +18,7 @@
           <td><%= route.last_bus %></td>
           <td> <% if current_user.try(:admin?) %>
               <%=link_to "Update Route", edit_route_path(route), class:"btn btn-primary"%>
-              <%=link_to "Delete Route", route_path(route),data: { turbo_method: :delete } ,class:"btn btn-primary"%>
+              <%=link_to "Delete Route", route_path(route),data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this route?" },class:"btn btn-primary"%>
               <%= link_to "Show all Buses" , route_path(route), class:"btn btn-primary" %>
             <%else%>
               <%= link_to "View Buses" ,route_path(route) , class:"btn btn-primary" %></td>

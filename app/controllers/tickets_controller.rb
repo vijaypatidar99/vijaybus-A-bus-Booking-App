@@ -1,15 +1,10 @@
 class TicketsController < ApplicationController
-  after_create :send_welcome_email
-  def send_welcome_email
-    UserMailer.welcome(self).deliver_now  
-end
-
-  def show
-    @user = current_user
-    @ticket = Ticket.where(user_id: current_user.id)
+  def index
+    @bus = Bus.find(params[:bus_id])
+    @tickets = @bus.tickets
   end
 
-  def index
+  def show
     @ticket = Ticket.find(params[:id])
   end
 
@@ -21,6 +16,7 @@ end
   def create
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
+    @ticket.status = :pending
     if @ticket.save
       bus = Bus.find(@ticket.bus.id)
       bus.seats -= 1
@@ -42,11 +38,28 @@ end
     end
   end
 
-  def send_index
-    @tickets = Ticket.all
-    tickets_html = render_to_string(template: "tickets/index.html.erb", layout: "mailer")
-    TicketMailer.send_ticket_index(current_user.email, tickets_html).deliver_now
-    redirect_to tickets_path, notice: "Index sent!"
+  def approve_ticket
+    @ticket = Ticket.find(params[:id])
+    if @ticket.update(status: :confirmed)
+      flash[:success] = "Ticket has been approved."
+      redirect_to request.referrer
+    else
+      flash[:error] = "There was an error in approving the ticket."
+      render :show
+    end
+  end
+
+  def reject_ticket
+    @ticket = Ticket.find(params[:id])
+    if @ticket.update(status: :rejected)
+      bus = @ticket.bus
+      bus.seats += 1
+      bus.save
+      flash[:success] = "Ticket rejected successfully"
+    else
+      flash[:error] = "Failed to reject ticket"
+    end
+    redirect_to request.referrer
   end
 
   private

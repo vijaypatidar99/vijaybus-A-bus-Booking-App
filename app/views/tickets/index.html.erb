@@ -1,65 +1,51 @@
-<div class="container-sm">
+ <% if current_user.try(:admin?) %>
   <div class="card text-center">
     <div class="card-header">
-      Welcome to <%=@ticket.bus.name%>
+      <h1>View <%=@bus.name%> Bookings</h1>
     </div>
     <div class="card-body">
-      <title>Ticket</title>
-      <body>
-       <ul><h1>Ticket Information</h1></ul>
-        <table>
+      <% if @bus.tickets.present? %>
+        <h3>Total Tickets - <%= @bus.tickets.count %> </h3>
+        <table class="table table-bordered table-striped">
           <tr>
-            <td><strong>Ticket ID:</strong></td>
-            <td><%= @ticket.id %></td>
+            <th>Ticket ID</th>
+            <th>Passenger Name</th>
+            <th>Passenger Age</th>
+            <th>Passenger Sex</th>
+            <th>Bus fare</th>
+            <th>Pickup Point</th>
+            <th>Drop Point</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+              <th>Ticket status</th>
+            <th>Actions</th>
           </tr>
-          <tr>
-            <td><strong>Passenger Name:</strong></td>
-            <td><%= @ticket.name %></td>
-          </tr>
-          <tr>
-            <td><strong>Passenger Age:</strong></td>
-            <td><%= @ticket.age %></td>
-          </tr>
-          <tr>
-            <td><strong>Passenger Sex:</strong></td>
-            <td><%= @ticket.sex %></td>
-          </tr>
-          <tr>
-            <td><strong>Bus Fare:</strong></td>
-            <td><%= @ticket.price %></td>
-          </tr>
-          <tr>
-            <td><strong>Pickup Point:</strong></td>
-            <td><%= @ticket.bus.pickup %></td>
-          </tr>
-          <tr>
-            <td><strong>Drop Point:</strong></td>
-            <td><%= @ticket.bus.drop %></td>
-          </tr>
-          <tr>
-            <td><strong>Bus Departure Time:</strong></td>
-            <td><%= @ticket.bus.departure_time %></td>
-          </tr>
- 
-          <tr>
-            <td><strong>Bus Arrival Time:</strong></td>
-            <td><%= @ticket.bus.arrival_time%></td>
-          </tr>
-          <tr>
-            <td><strong>Ticket Created At:</strong></td>
-            <td><%= @ticket.created_at %></td>
-          </tr>
-          <tr>
-            <td><strong>Ticket Updated At:</strong></td>
-            <td><%= @ticket.created_at %></td>
-          </tr>
-        </table>
+          <% @tickets.each do |ticket| %>
+            <tr>
+              <td><%= ticket.id %></td>
+              <td><%= ticket.name %></td>
+              <td><%= ticket.age %></td>
+              <td><%= ticket.sex %></td>
+              <td><%= ticket.price %></td>
+              <td><%= ticket.bus.pickup %></td>
+              <td><%= ticket.bus.drop %></td>
+              <td><%= ticket.bus.departure_time.strftime("%H:%M") %></td>
+              <td><%= ticket.bus.arrival_time.strftime("%H:%M") %></td>
+               <td><%= ticket.status %></td>
+              <td><%= link_to 'Details', ticket_path(ticket) ,class:"btn btn-info"%>
+                <%= link_to "Approve", approve_ticket_path(ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
+                <%= link_to "Reject", reject_ticket_path(ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
+             </td>
+              </tr>
+            <%end%>
+          </table >
+        </div>
+        <div class="card-footer text-body-secondary">
+          <%=time = Time.now.to_s
+             time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+        </div>
       </div>
-      <div class="card-footer text-body-secondary">
-        <%=time = Time.now.to_s
-      time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M")
-      %>
-      </div>
-    </div>
-  </div>
-
+    <%else%>
+      <p>You have no tickets.</p>
+    <%end%>
+  <%end%>

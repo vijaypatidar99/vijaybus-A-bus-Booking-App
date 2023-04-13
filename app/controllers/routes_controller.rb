@@ -41,7 +41,7 @@ class RoutesController < ApplicationController
   def destroy
     Route.find(params[:id]).destroy
     flash[:success] = "Route deleted"
-    redirect_to root_path
+    redirect_to request.referrer
   end
 
   def search

@@ -14,8 +14,12 @@
       <div class="d-flex" role="search">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <%if user_signed_in?%>
-            <%= link_to "view Bookings" , tickets_show_path ,class:"btn btn-primary"%>
-            <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
+            <% if current_user.try(:admin?) %>
+              <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
+            <%else%>
+              <%= link_to 'My Tickets',users_show_path(@user) ,class:"btn btn-primary"%>
+              <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
+            <%end%>
           <%else%>
             <%= button_to "Sign in" , new_user_session_path, class:"btn btn-primary" %>
             <%= link_to "Sign up" , new_user_registration_path ,class:"btn btn-primary"%>
