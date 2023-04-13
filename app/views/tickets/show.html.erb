@@ -29,6 +29,8 @@
             <td><%= ticket.bus.drop %></td>
             <td><%= ticket.bus.departure_time %></td>
             <td><%= ticket.bus.arrival_time %></td>
+             <td><%= link_to 'View Ticket Details', ticket_path(ticket) ,class:"btn btn-info"%>
+          <%= link_to 'Send Ticket Index', index_tickets_path(ticket), method: :post %></td>
           </tr>
           <%end%>
         </table >
@@ -44,3 +46,4 @@
 <%else%>
   <p>You have no tickets.</p>
 <%end%>
+

@@ -78,3 +78,6 @@ gem "devise"
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'prawn'
+
+#to send email
+gem "letter_opener", group: :development

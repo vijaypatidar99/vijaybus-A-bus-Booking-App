@@ -11,6 +11,8 @@
       <th>Seat Availability</th>
       <th>Pickup Point</th>
       <th>Drop Point</th>
+       <th>Departure Time</th>
+        <th>Arrival Time</th>
       <th>Actions</th>
     </tr>
     <% @buses.each do |bus| %>
@@ -23,6 +25,8 @@
         <td><%= bus.seats %></td>
         <td><%= bus.pickup %></td>
         <td><%= bus.drop %></td>
+         <td><%= bus.departure_time %></td>
+          <td><%= bus.arrival_time %></td>
         <td> <% if current_user.try(:admin?) %>
             <%=link_to "Update Bus", edit_bus_path(bus), class:"btn btn-primary"%>
             <%=link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%> </td>

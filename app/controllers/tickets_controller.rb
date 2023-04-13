@@ -1,7 +1,16 @@
 class TicketsController < ApplicationController
+  after_create :send_welcome_email
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now  
+end
+
   def show
     @user = current_user
     @ticket = Ticket.where(user_id: current_user.id)
+  end
+
+  def index
+    @ticket = Ticket.find(params[:id])
   end
 
   def new
@@ -13,9 +22,12 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     if @ticket.save
+      bus = Bus.find(@ticket.bus.id)
+      bus.seats -= 1
+      bus.save
       flash.now[:success] = "ticket save Successfully"
       redirect_to root_path
-        else
+    else
       render "new"
     end
   end
@@ -30,20 +42,16 @@ class TicketsController < ApplicationController
     end
   end
 
-  def print
-    @ticket = Ticket.find(params[:id])
-    respond_to do |format|
-      format.pdf do
-        pdf = TicketPdf.new(@ticket)
-        send_data pdf.render, filename: "ticket.pdf", type: "application/pdf", disposition: "inline"
-      end
-    end
+  def send_index
+    @tickets = Ticket.all
+    tickets_html = render_to_string(template: "tickets/index.html.erb", layout: "mailer")
+    TicketMailer.send_ticket_index(current_user.email, tickets_html).deliver_now
+    redirect_to tickets_path, notice: "Index sent!"
   end
-
 
   private
 
   def ticket_params
-    params.require(:ticket).permit(:name, :age, :sex, :bus_id, :price)
+    params.require(:ticket).permit(:name, :age, :sex, :bus_id, :price, :departure_time, :arrival_time)
   end
 end

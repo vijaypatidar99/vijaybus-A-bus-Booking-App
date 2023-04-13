@@ -14,9 +14,7 @@
       <div class="d-flex" role="search">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <%if user_signed_in?%>
-          <% if current_user && current_user.tickets.present? %>
-           <%= link_to "view Bookings" , tickets_show_path ,class:"btn btn-primary"%>
-           <%end%>
+            <%= link_to "view Bookings" , tickets_show_path ,class:"btn btn-primary"%>
             <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
           <%else%>
             <%= button_to "Sign in" , new_user_session_path, class:"btn btn-primary" %>

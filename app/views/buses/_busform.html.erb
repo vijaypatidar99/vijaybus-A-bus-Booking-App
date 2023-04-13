@@ -15,5 +15,9 @@
   <%= f.text_field :pickup, class: 'form-control' %>
   <%= f.label :drop,"Enter Drop Point"%>
   <%= f.text_field :drop, class: 'form-control' %>
+    <%= f.label :departure_time,"Enter Departure Time"%>
+  <%= f.text_field :departure_time, class: 'form-control' %>
+    <%= f.label :arrival_time,"Enter Arrival Time"%>
+  <%= f.text_field :arrival_time, class: 'form-control' %>
   <%= f.submit "Save Bus", class: "btn btn-primary" %>
 <% end %>
