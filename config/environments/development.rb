@@ -25,7 +25,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}",
     }
   else
     config.action_controller.perform_caching = false
@@ -37,7 +37,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
@@ -66,9 +66,27 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
   Rails.application.configure do
-    config.default_url_options = { :host => 'localhost:3000', :protocol => 'http://', :locale => nil }
+    config.default_url_options = { :host => "localhost:3000", :protocol => "http://", :locale => nil }
   end
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+ # config.action_mailer.performa_deliveries = true
+ config.action_mailer.delivery_method = :smtp
+#  ActionMailer::Base.smtp_settings = {
+#   :user_name => 'vijay patidar', # This is the string literal 'apikey', NOT the ID of your API key
+#   :password => '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', # This is the secret sendgrid API key which was issued during API key creation
+#   :address => 'smtp.sendgrid.net',
+#   :port => 587,
+#   :authentication => :plain,
+#   :enable_starttls_auto => true
+# }
+ActionMailer::Base.smtp_settings = {
+  address:        "smtp.sendgrid.net",
+  port:            587,
+  authentication: :plain,
+  user_name:      'vijay',
+  password:       ENV['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']
+}
 end

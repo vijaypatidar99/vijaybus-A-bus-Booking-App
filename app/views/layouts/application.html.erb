@@ -16,7 +16,14 @@
       <%= render "shared/nav" %>
       <%= notice %>
       <%= alert %>
-      <%= yield %>
     </div>
+    <body class="d-flex flex-column min-vh-100">
+      <main class="flex-grow-1">
+        <%= yield %>
+      </main>
+      <footer >
+        <%=render "shared/footer"%>
+      </footer>
+    </body>
   </body>
 </html>

@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  authorize_resource
   def index
     @bus = Bus.find(params[:bus_id])
     @tickets = @bus.tickets
@@ -84,6 +85,10 @@ class TicketsController < ApplicationController
 
   def cancelled_tickets
     @cancelled_tickets = Ticket.where(status: "Cancelled")
+  end
+
+  def send_email
+    TicketMailer.send_email.deliver.now
   end
 
   private

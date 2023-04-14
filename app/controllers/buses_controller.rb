@@ -5,6 +5,7 @@ class BusesController < ApplicationController
   def index
     @route = Route.find(params[:route_id])
     @buses = @route.buses.paginate(page: params[:page])
+    #authorize! :manage, @buses
   end
 
   def show

@@ -29,7 +29,8 @@
         <td><%= bus.departure_time %></td>
         <td><%= bus.arrival_time %></td>
         <td>
-          <% if current_user.try(:admin?) %>
+          <%# if current_user.try(:admin?) %>
+          <% if can?(:manage, bus) %>
             <%=link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
             <%=link_to "Tickets", bus_tickets_path(bus), class:"btn btn-primary"%>
             <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %>
