@@ -1,4 +1,5 @@
 <%= form_with model: @route, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :from,"Enter Starting City" %>
   <%= f.text_field :from, class: 'form-control' %>
   <%= f.label :to, "Enter Destination City" %>

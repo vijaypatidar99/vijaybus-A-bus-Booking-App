@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  #before_action :logged_in_user, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   def new
     @route = Route.new
@@ -54,11 +54,4 @@ class RoutesController < ApplicationController
   def route_params
     params.require(:route).permit(:from, :to, :first_bus, :last_bus, :bus_id)
   end
-
-  # def logged_in_user
-  #   unless user_signed_in?
-  #     flash[:danger] = "Please sign up or sign in"
-  #     redirect_to new_user_registration_path
-  #   end
-  # end
 end

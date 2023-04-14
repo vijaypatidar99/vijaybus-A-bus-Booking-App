@@ -1,8 +1,10 @@
 class BusesController < ApplicationController
+  authorize_resource
   before_action :logged_in_user, only: [:edit, :update, :destroy]
 
   def index
-    @buses = Bus.paginate(page: params[:page])
+    @route = Route.find(params[:route_id])
+    @buses = @route.buses.paginate(page: params[:page])
   end
 
   def show
@@ -17,7 +19,7 @@ class BusesController < ApplicationController
     @bus = Bus.new(bus_params)
     if @bus.save
       flash[:success] = "Bus Added successfully"
-      redirect_to route_path
+      redirect_to root_path
     else
       render "new"
     end
@@ -31,7 +33,7 @@ class BusesController < ApplicationController
     @bus = Bus.find(params[:id])
     if @bus.update(bus_params)
       flash[:success] = "Bus updated"
-      redirect_to route_path
+      redirect_to root_path
     else
       render "edit"
     end

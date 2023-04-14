@@ -16,8 +16,9 @@
           <th>Drop Point</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
-            <th>Ticket status</th>
-          <th>Actions</th>
+          <th>Ticket status</th>
+          <th>View Details</th>
+          <th>Cancel Ticket</th>
         </tr>
         <% @ticket.each do |ticket| %>
           <tr>
@@ -30,18 +31,19 @@
             <td><%= ticket.bus.drop %></td>
             <td><%= ticket.bus.departure_time %></td>
             <td><%= ticket.bus.arrival_time %></td>
-             <td><%= ticket.status %></td>
-            <td><%= link_to 'View Ticket Details', ticket_path(ticket) ,class:"btn btn-info"%>
-            </tr>
-          <%end%>
-        </table >
-      </div>
-      <div class="card-footer text-body-secondary">
-        <%=time = Time.now.to_s
+            <td><%= ticket.status %></td>
+            <td><%= link_to 'View Ticket Details', ticket_path(ticket) ,class:"btn btn-info"%></td>
+            <td><%= link_to 'Cancel Ticket', bus_ticket_cancel_ticket_path(ticket.bus_id,ticket), data: {method: :cancel_ticket,turbo_confirm: "Are you sure to cancel this ticket?" } ,class:"btn btn-info"%></td>
+          </tr>
+        <%end%>
+      </table >
+    </div>
+    <div class="card-footer text-body-secondary">
+      <%=time = Time.now.to_s
       time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M")
       %>
-      </div>
     </div>
-  <%else%>
-    <p>You have no tickets.</p>
-  <%end%>
+  </div>
+<%else%>
+  <p>You have no tickets.</p>
+<%end%>

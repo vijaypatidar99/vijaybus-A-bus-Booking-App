@@ -75,6 +75,8 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.4)
+    byebug (11.1.3)
+    cancancan (3.5.0)
     capybara (3.39.0)
       addressable
       matrix
@@ -247,6 +249,8 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap-will_paginate
+  byebug
+  cancancan
   capybara
   cssbundling-rails
   debug

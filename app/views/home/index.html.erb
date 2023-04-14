@@ -1,8 +1,0 @@
-<%=render 'shared/slides' %>
-<%=render 'shared/pagebreaker'%>
-<% if current_user.try(:admin?) %>
-<%=render 'routes/index'%>
-  <%=render 'adminpage'%>
-<%else%>
-  <%=render 'routes/index'%>
-<%end%>

@@ -1,3 +1,5 @@
+<%=render 'shared/slides' %>
+<%=render 'shared/pagebreaker'%>
 <div class="card container">
   <div class="card-body ">
     <table class="table table-bordered table-striped">
@@ -19,9 +21,9 @@
           <td> <% if current_user.try(:admin?) %>
               <%=link_to "Update Route", edit_route_path(route), class:"btn btn-primary"%>
               <%=link_to "Delete Route", route_path(route),data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this route?" },class:"btn btn-primary"%>
-              <%= link_to "Show all Buses" , route_path(route), class:"btn btn-primary" %>
+              <%= link_to "Show all Buses" , route_buses_path(route), class:"btn btn-primary" %>
             <%else%>
-              <%= link_to "View Buses" ,route_path(route) , class:"btn btn-primary" %></td>
+              <%= link_to "View Buses" ,route_buses_path(route) , class:"btn btn-primary" %></td>
           </tr>
         <%end%>
       <% end %>
@@ -33,3 +35,6 @@
 </div>
 </div>
 </div>
+<%if current_user.try(:admin?)%>
+  <%=render 'home/adminpage'%>
+<%end%>

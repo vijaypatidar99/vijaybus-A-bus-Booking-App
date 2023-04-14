@@ -33,8 +33,8 @@
               <td><%= ticket.bus.arrival_time.strftime("%H:%M") %></td>
                <td><%= ticket.status %></td>
               <td><%= link_to 'Details', ticket_path(ticket) ,class:"btn btn-info"%>
-                <%= link_to "Approve", approve_ticket_path(ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
-                <%= link_to "Reject", reject_ticket_path(ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
+                <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
+                <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
              </td>
               </tr>
             <%end%>

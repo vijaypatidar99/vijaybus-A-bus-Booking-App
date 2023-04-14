@@ -15,9 +15,10 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <%if user_signed_in?%>
             <% if current_user.try(:admin?) %>
+              <%= link_to 'Cancel Tickets', cancelled_tickets_path, class:"btn btn-info"%>
               <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
             <%else%>
-              <%= link_to 'My Tickets',users_show_path(@user) ,class:"btn btn-primary"%>
+              <%= link_to 'My Tickets',my_tickets_path(@user) ,class:"btn btn-primary"%>
               <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
             <%end%>
           <%else%>

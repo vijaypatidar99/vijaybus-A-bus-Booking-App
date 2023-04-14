@@ -1,0 +1,39 @@
+ <% if current_user.try(:admin?) %>
+  <div class="card text-center">
+    <div class="card-body">
+      <% if @cancelled_tickets.present? %>
+        <h3>Total Tickets - <%= @cancelled_tickets.count %> </h3>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <th>Ticket ID</th>
+            <th>Passenger Name</th>
+            <th>Passenger Age</th>
+            <th>Passenger Sex</th>
+            <th>Bus fare</th>
+            <th>Ticket status</th>
+            <th>Actions</th>
+          </tr>
+          <% @cancelled_tickets.each do |ticket| %>
+            <tr>
+              <td><%= ticket.id %></td>
+              <td><%= ticket.name %></td>
+              <td><%= ticket.age %></td>
+              <td><%= ticket.sex %></td>
+              <td><%= ticket.price %></td>
+               <td><%= ticket.status %></td>
+              <td>
+               <%= link_to "Destroy", ticket_path(ticket), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this cancelled ticket?" } , class:"btn btn-danger" %>
+             </td>
+              </tr>
+            <%end%>
+          </table >
+        </div>
+        <div class="card-footer text-body-secondary">
+          <%=time = Time.now.to_s
+             time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+        </div>
+      </div>
+    <%else%>
+      <p>No Cancelled Tickets </p>
+    <%end%>
+  <%end%>

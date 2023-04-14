@@ -3,12 +3,14 @@
     <div class="card-header">
       Welcome to <%=@ticket.bus.name%>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <%if @ticket.confirmed? %>
-        <button type="button" class="btn btn-outline-success">Confirmed Ticket</button>
-        <%elsif @ticket.rejected?%>
-        <button type="button" class="btn btn-outline-danger">Ticket Not Confirmed</button>
+        <%if @ticket.Confirmed? %>
+          <button type="button" class="btn btn-outline-success">Confirmed Ticket</button>
+        <%elsif @ticket.Rejected?%>
+          <button type="button" class="btn btn-outline-danger">Ticket Not Confirmed</button>
+        <%elsif @ticket.Cancelled?%>
+          <button type="button" class="btn btn-outline-danger">Cancelled</button>
         <%else%>
-         <button type="button" class="btn btn-outline-danger">Ticket Not Confirmed yet - Status pending</button>
+          <button type="button" class="btn btn-outline-danger">Ticket Not Confirmed yet - Status pending please wait...</button>
         <%end%>
       </div>
     </div>
