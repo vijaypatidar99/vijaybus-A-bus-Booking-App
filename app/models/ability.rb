@@ -4,7 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user
+    user ||= User.new
 
     if user.admin?
       can :manage, Bus
@@ -12,7 +12,7 @@ class Ability
       can :manage, Ticket
       can :manage, :cancelled_tickets
     else
-      can [:read,:search], Bus
+      can [:read, :search], Bus
       can :read, Route
       can [:read, :create, :cancel_ticket], Ticket
       can :read, :my_tickets

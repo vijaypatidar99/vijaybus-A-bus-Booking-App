@@ -1,12 +1,18 @@
-<%= form_tag buses_search_path, method: :get do %>
-  <%= label_tag :from, "Starting City" %>
-  <%= text_field_tag :from, params[:from] %>
-
-  <%= label_tag :to, "Destination City" %>
-  <%= text_field_tag :to, params[:to] %>
-
-  <%= label_tag :date, "Date of Travel" %>
-  <%= text_field_tag :date, params[:date], type: "date" %>
-
-  <%= submit_tag "Search" %>
-<% end %>
+<div class="card text-center">
+  <div class="card-header">
+    <h2>VijayBus is an official TSRTC booking partner</h2>
+  </div>
+  <div class="card-body">
+    <%= form_tag buses_search_path, method: :get do %>
+      <%= label_tag :from, "Starting City" %>
+      <%= text_field_tag :from, params[:from] %>
+      <%= label_tag :to, "Destination City" %>
+      <%= text_field_tag :to, params[:to] %>
+      <%= label_tag :date, "Date of Travel" %>
+      <%= text_field_tag :date, params[:date], type: "date" %>
+      <%= submit_tag "Search",class: "btn btn-danger  btn-block" %>
+    <% end %>
+  </div>
+  <div class="card-footer text-body-secondary">
+  </div>
+</div>

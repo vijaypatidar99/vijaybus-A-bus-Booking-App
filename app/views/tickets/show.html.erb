@@ -23,7 +23,7 @@
               <th>Ticket ID:</th>
               <td><%= @ticket.id %></td>
             </tr>
-             <tr>
+            <tr>
               <th>Bus ID:</th>
               <td><%= @ticket.bus_id %></td>
             </tr>
@@ -76,18 +76,17 @@
                 <th>Cancel Reasons</th>
                 <td><%= @ticket.cancel_reason %></td>
               </tr>
-              <%end%>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="card-footer text-muted">
-        <%=time = Time.now.to_s 
-      time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+            <%end%>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div class="d-flex justify-content-center justify-content-md-end mt-3">
-      <%=link_to "Print Ticket",'#',class:"btn btn-primary mr-md-2",onclick: "window.print()"%>
-     
+    <div class="card-footer text-muted">
+      <%=time = Time.now.to_s 
+      time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
     </div>
   </div>
+  <div class="d-flex justify-content-center justify-content-md-end mt-3">
+    <%=link_to "Print Ticket",'#',class:"btn btn-primary mr-md-2",onclick: "window.print()"%>
+  </div>
+</div>

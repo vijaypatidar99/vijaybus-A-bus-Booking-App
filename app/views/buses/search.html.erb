@@ -1,14 +1,14 @@
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Starting City</th>
-      <th>Destination City</th>
-      <th>Departure Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @buses.any? %>
+<% if @buses.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Starting City</th>
+        <th>Destination City</th>
+        <th>Departure Time</th>
+      </tr>
+    </thead>
+    <tbody>
       <% @buses.each do |bus| %>
         <tr>
           <td><%= bus.route.id %></td>
@@ -21,6 +21,6 @@
       <tr>
         <td colspan="4">No buses found for this route</td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>

@@ -19,7 +19,7 @@ class BusesController < ApplicationController
     @bus = Bus.new(bus_params)
     dates = params[:bus][:dates]
     if dates.present?
-      @bus.dates = dates.reject(&:empty?).map(&:strip).join(', ')
+      @bus.dates = dates.reject(&:empty?).map(&:strip).join(", ")
     else
       @bus.dates = []
     end

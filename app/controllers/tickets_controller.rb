@@ -11,12 +11,17 @@ class TicketsController < ApplicationController
   end
 
   def all_bookings
-    @buses = Bus.all.includes(:tickets) 
+    @buses = Bus.all.includes(:tickets)
   end
 
   def new
     @bus = Bus.find_by(id: params[:bus_id])
-    @ticket = Ticket.new
+    if current_user
+      @ticket = Ticket.new
+    else
+      flash[:notice] = "Please sign up or sign in to book a ticket"
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -65,7 +70,7 @@ class TicketsController < ApplicationController
   end
 
   def reject_ticket
-    # authorize! :reject_ticket, @ticket
+    #authorize! :reject_ticket, @ticket
     @ticket = Ticket.find(params[:ticket_id])
     if @ticket.update(status: :Rejected)
       bus = @ticket.bus

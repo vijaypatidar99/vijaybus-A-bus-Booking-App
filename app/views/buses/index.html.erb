@@ -38,7 +38,7 @@
             <td>
               <% if can?(:manage, bus) %>
                 <%= link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
-                <%= link_to "Tickets", bus_tickets_path(bus), class:"btn btn-primary"%>
+                <%= link_to "Bookings", bus_tickets_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %>
               <% else %>
                 <%= link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%>

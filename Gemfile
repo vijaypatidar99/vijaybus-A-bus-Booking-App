@@ -85,4 +85,3 @@ gem 'pg'
 gem 'cancancan'
 gem 'byebug'
 gem 'sendgrid-ruby'
-gem 'dotenv-rails', groups: [:development, :test]
