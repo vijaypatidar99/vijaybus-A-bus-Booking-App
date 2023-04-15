@@ -12,13 +12,36 @@
   <%= f.text_field :seats, class: 'form-control' %>
   <%= f.label :route_id,"Enter Route ID"%>
   <%= f.text_field :route_id, class: 'form-control' %>
+  <%= f.label :dates, "Dates (select multiple)" %>
+  <%= f.select :dates, options_for_select((Date.today..2.weeks.from_now).map{ |date| [date.to_s, date.to_s] }), {}, multiple: true %><br>
+  <div id="selected-dates"></div>
   <%= f.label :pickup,"Enter Pickup Point"%>
   <%= f.text_field :pickup, class: 'form-control' %>
   <%= f.label :drop,"Enter Drop Point"%>
   <%= f.text_field :drop, class: 'form-control' %>
-    <%= f.label :departure_time,"Enter Departure Time"%>
+  <%= f.label :departure_time,"Enter Departure Time"%>
   <%= f.text_field :departure_time, class: 'form-control' %>
-    <%= f.label :arrival_time,"Enter Arrival Time"%>
+  <%= f.label :arrival_time,"Enter Arrival Time"%>
   <%= f.text_field :arrival_time, class: 'form-control' %>
   <%= f.submit "Save Bus", class: "btn btn-primary" %>
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var select = document.querySelector('select[name="bus[dates][]"]');
+    var output = document.getElementById('selected-dates');
+    select.addEventListener('change', function() {
+      output.textContent = '';
+      var options = select.selectedOptions;
+      for (var i = 0; i < options.length; i++) {
+        var date = options[i].value;
+        output.textContent += date + ', ';
+      }
+    });
+  });
+</script>
+
+
+
+
+

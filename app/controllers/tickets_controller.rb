@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   authorize_resource
+
   def index
     @bus = Bus.find(params[:bus_id])
     @tickets = @bus.tickets
@@ -7,6 +8,10 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
+  end
+
+  def all_bookings
+    @buses = Bus.all.includes(:tickets) 
   end
 
   def new
@@ -44,7 +49,7 @@ class TicketsController < ApplicationController
   end
 
   def approve_ticket
-    authorize! :approve_ticket, @ticket
+    #authorize! :approve_ticket, @ticket
     @ticket = Ticket.find(params[:ticket_id])
     if @ticket.update(status: :Confirmed)
       bus = Bus.find(@ticket.bus.id)
@@ -52,6 +57,7 @@ class TicketsController < ApplicationController
       bus.save
       flash[:success] = "Ticket has been approved."
       redirect_to request.referrer
+      TicketMailer.send_email(@ticket).deliver_now
     else
       flash[:error] = "There was an error in approving the ticket."
       render :show
@@ -67,6 +73,7 @@ class TicketsController < ApplicationController
       bus.save
       flash[:success] = "Ticket rejected successfully"
       redirect_to request.referrer
+      TicketMailer.send_email(@ticket).deliver_now
     else
       flash[:error] = "Failed to reject ticket"
       redirect_to request.referrer
@@ -74,13 +81,18 @@ class TicketsController < ApplicationController
   end
 
   def cancel_ticket
-    # authorize! :cancel_ticket, @ticket
     @ticket = Ticket.find(params[:ticket_id])
-    @ticket.update(status: "Cancelled")
-    bus = @ticket.bus
-    bus.seats += 1
-    bus.save
-    redirect_to request.referrer, notice: "Ticket was successfully cancelled."
+    if request.post?
+      cancel_reason = params[:cancel_reason]
+      @ticket.update(status: "Cancelled", cancel_reason: cancel_reason)
+      bus = @ticket.bus
+      bus.seats += 1
+      bus.save
+      redirect_to my_tickets_path, notice: "Ticket was successfully cancelled."
+      TicketMailer.send_email(@ticket).deliver_now
+    else
+      render "tickets/cancel_ticket_form"
+    end
   end
 
   def cancelled_tickets
@@ -88,7 +100,8 @@ class TicketsController < ApplicationController
   end
 
   def send_email
-    TicketMailer.send_email.deliver.now
+    @ticket = Ticket.find(params[:id])
+    TicketMailer.send_email(@ticket).deliver_now
   end
 
   private

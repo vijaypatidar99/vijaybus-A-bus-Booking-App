@@ -1,0 +1,12 @@
+<%= form_tag buses_search_path, method: :get do %>
+  <%= label_tag :from, "Starting City" %>
+  <%= text_field_tag :from, params[:from] %>
+
+  <%= label_tag :to, "Destination City" %>
+  <%= text_field_tag :to, params[:to] %>
+
+  <%= label_tag :date, "Date of Travel" %>
+  <%= text_field_tag :date, params[:date], type: "date" %>
+
+  <%= submit_tag "Search" %>
+<% end %>

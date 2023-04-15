@@ -1,51 +1,55 @@
 <% if @route.buses.any? %>
-  <h3>Total Buses in this Route (<%= @route.buses.count %>) 
-  </h3>
-  <table class="table table-bordered table-striped">
-    <tr>
-    
-      <th>Bus Id</th>
-      <th>Name</th>
-      <th>Bus Number</th>
-      <th>Bus Type</th>
-      <th>Bus Price</th>
-      <th>Seat Availability</th>
-      <th>Pickup Point</th>
-      <th>Drop Point</th>
-      <th>Departure Time</th>
-      <th>Arrival Time</th>
-      <th>Actions</th>
-    </tr>
-    <% @buses.each do |bus| %>
-      <tr>
-        <td><%= bus.id %></td>
-        <td><%= bus.name %></td>
-        <td><%= bus.number %></td>
-        <td><%= bus.bustype %></td>
-        <td><%= bus.price %></td>
-        <td><%= bus.seats %></td>
-        <td><%= bus.pickup %></td>
-        <td><%= bus.drop %></td>
-        <td><%= bus.departure_time %></td>
-        <td><%= bus.arrival_time %></td>
-        <td>
-          <%# if current_user.try(:admin?) %>
-          <% if can?(:manage, bus) %>
-            <%=link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
-            <%=link_to "Tickets", bus_tickets_path(bus), class:"btn btn-primary"%>
-            <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %>
-          <% else %>
-            <%=link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  <%else%>
-    <h1>No Bus found in this Route </h1>
-  <%end%>
-</table >
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <%= will_paginate @buses %>
-  </ul>
-</nav>
+  <h3 class="mb-3">Total Buses in this Route (<%= @route.buses.count %>)</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Bus Id</th>
+          <th>Name</th>
+          <th>Bus Number</th>
+          <th>Bus Type</th>
+          <th>Bus Price</th>
+          <th>Seat Availability</th>
+          <th>Pickup Point</th>
+          <th>Drop Point</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @buses.each do |bus| %>
+          <tr>
+            <td><%= bus.id %></td>
+            <td><%= bus.name %></td>
+            <td><%= bus.number %></td>
+            <td><%= bus.bustype %></td>
+            <td><%= bus.price %></td>
+            <td><%= bus.seats %></td>
+            <td><%= bus.pickup %></td>
+            <td><%= bus.drop %></td>
+            <td><%= bus.departure_time %></td>
+            <td><%= bus.arrival_time %></td>
+            <td>
+              <%# if current_user.try(:admin?) %>
+              <% if can?(:manage, bus) %>
+                <%= link_to "Update", edit_bus_path(bus), class: "btn btn-primary" %>
+                <%= link_to "Tickets", bus_tickets_path(bus), class: "btn btn-primary" %>
+                <%= link_to "Destroy", bus_path(bus), data: { turbo_method: :delete, turbo_confirm: "Are you sure to delete this bus?" }, class: "btn btn-danger" %>
+              <% else %>
+                <%= link_to "Book Ticket", new_bus_ticket_path(bus), class: "btn btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <%= will_paginate @buses, previous_label: "Previous", next_label: "Next" %>
+    </ul>
+  </nav>
+<% else %>
+  <h1>No Bus found in this Route</h1>
+<% end %>

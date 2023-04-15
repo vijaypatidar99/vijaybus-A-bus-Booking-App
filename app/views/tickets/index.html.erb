@@ -1,51 +1,58 @@
- <% if current_user.try(:admin?) %>
+<% if current_user.try(:admin?) %>
   <div class="card text-center">
     <div class="card-header">
-      <h1>View <%=@bus.name%> Bookings</h1>
+      <h1>View <%= @bus.name %> Bookings</h1>
     </div>
     <div class="card-body">
       <% if @bus.tickets.present? %>
         <h3>Total Tickets - <%= @bus.tickets.count %> </h3>
-        <table class="table table-bordered table-striped">
-          <tr>
-            <th>Ticket ID</th>
-            <th>Passenger Name</th>
-            <th>Passenger Age</th>
-            <th>Passenger Sex</th>
-            <th>Bus fare</th>
-            <th>Pickup Point</th>
-            <th>Drop Point</th>
-            <th>Departure Time</th>
-            <th>Arrival Time</th>
-              <th>Ticket status</th>
-            <th>Actions</th>
-          </tr>
-          <% @tickets.each do |ticket| %>
-            <tr>
-              <td><%= ticket.id %></td>
-              <td><%= ticket.name %></td>
-              <td><%= ticket.age %></td>
-              <td><%= ticket.sex %></td>
-              <td><%= ticket.price %></td>
-              <td><%= ticket.bus.pickup %></td>
-              <td><%= ticket.bus.drop %></td>
-              <td><%= ticket.bus.departure_time.strftime("%H:%M") %></td>
-              <td><%= ticket.bus.arrival_time.strftime("%H:%M") %></td>
-               <td><%= ticket.status %></td>
-              <td><%= link_to 'Details', ticket_path(ticket) ,class:"btn btn-info"%>
-                <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
-                <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
-             </td>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Ticket ID</th>
+                <th>Passenger Name</th>
+                <th>Passenger Age</th>
+                <th>Passenger Sex</th>
+                <th>Bus fare</th>
+                <th>Pickup Point</th>
+                <th>Drop Point</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Ticket status</th>
+                <th>Actions</th>
               </tr>
-            <%end%>
-          </table >
-        </div>
-        <div class="card-footer text-body-secondary">
-          <%=time = Time.now.to_s
-             time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+            </thead>
+            <tbody>
+              <% @tickets.each do |ticket| %>
+                <tr>
+                  <td><%= ticket.id %></td>
+                  <td><%= ticket.name %></td>
+                  <td><%= ticket.age %></td>
+                  <td><%= ticket.sex %></td>
+                  <td><%= ticket.price %></td>
+                  <td><%= ticket.bus.pickup %></td>
+                  <td><%= ticket.bus.drop %></td>
+                  <td><%= ticket.bus.departure_time.strftime("%H:%M") %></td>
+                  <td><%= ticket.bus.arrival_time.strftime("%H:%M") %></td>
+                  <td><%= ticket.status %></td>
+                  <td>
+                    <%= link_to 'Details', ticket_path(ticket), class: "btn btn-info" %>
+                    <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
+                    <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
-    <%else%>
+      <div class="card-footer text-body-secondary">
+        <% time = Time.now.to_s %>
+        <%= DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+      </div>
+    <% else %>
       <p>You have no tickets.</p>
-    <%end%>
-  <%end%>
+    <% end %>
+  </div>
+<% end %>

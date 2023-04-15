@@ -5,7 +5,6 @@ class BusesController < ApplicationController
   def index
     @route = Route.find(params[:route_id])
     @buses = @route.buses.paginate(page: params[:page])
-    #authorize! :manage, @buses
   end
 
   def show
@@ -18,6 +17,12 @@ class BusesController < ApplicationController
 
   def create
     @bus = Bus.new(bus_params)
+    dates = params[:bus][:dates]
+    if dates.present?
+      @bus.dates = dates.reject(&:empty?).map(&:strip).join(', ')
+    else
+      @bus.dates = []
+    end
     if @bus.save
       flash[:success] = "Bus Added successfully"
       redirect_to root_path
@@ -46,10 +51,16 @@ class BusesController < ApplicationController
     redirect_to request.referrer
   end
 
+  def search
+    @from = params[:from]
+    @to = params[:to]
+    @buses = Bus.where(starting_city: @from, destination_city: @to)
+  end
+
   private
 
   def bus_params
-    params.require(:bus).permit(:name, :number, :bustype, :price, :seats, :route_id, :drop, :pickup, :departure_time, :arrival_time)
+    params.require(:bus).permit(:starting_city, :destination_city, :name, :number, :bustype, :price, :seats, :route_id, :drop, :pickup, :departure_time, :arrival_time, date: [])
   end
 
   def logged_in_user

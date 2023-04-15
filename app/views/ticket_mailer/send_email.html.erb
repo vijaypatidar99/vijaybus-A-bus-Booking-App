@@ -1,1 +1,86 @@
-<h1>Your ticket has been approved!</h1>
+<html>
+  <body>
+    <div class="card text-center">
+      <div class="card-header">
+        <h1> Welcome to <%= @ticket.bus.name %></h1>
+      </div>
+      <div class="card-body">
+        <ul>
+          <h3> Dear <%=@ticket.name%>,</h3>
+          <%if @ticket.Confirmed? %>
+            <h4> We are pleased to inform you that your bus ticket reservation for <%=@ticket.bus.route.from%> to  <%=@ticket.bus.route.to%> on  <%=@ticket.date%> has been accepted by our team.<br>
+              Thank you for choosing VijayBus for your travel needs. We hope you have a safe and comfortable journey with us. <br>
+              Best regards,<br>
+              <b>Vijay Bus Service
+              </ul>
+            <%else%>
+              <ul>
+                <h4> We regret to inform you that your bus ticket reservation for <%=@ticket.bus.route.from%> to  <%=@ticket.bus.route.to%> on  <%=@ticket.date%>has been rejected by our team.
+                  <br>
+                  We apologize for any inconvenience this may cause. Please feel free to contact us if you have any questions or concerns. <br>
+                  Best regards,<br>
+                  <b>Vijay Bus Service
+                  <%end%>
+                </ul>
+                <ul>
+                  <h1>Ticket Information</h1>
+                </ul>
+                <table>
+                  <tr>
+                    <td><strong>Ticket ID:</strong></td>
+                    <td><%= @ticket.id %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Passenger Name:</strong></td>
+                    <td><%= @ticket.name %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Passenger Age:</strong></td>
+                    <td><%= @ticket.age %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Passenger Sex:</strong></td>
+                    <td><%= @ticket.sex %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bus Fare:</strong></td>
+                    <td><%= @ticket.price %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Pickup Point:</strong></td>
+                    <td><%= @ticket.bus.pickup %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Drop Point:</strong></td>
+                    <td><%= @ticket.bus.drop %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bus Departure Date & Time:</strong></td>
+                    <td><%= @ticket.bus.departure_time %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bus Arrival Date & Time:</strong></td>
+                    <td><%= @ticket.bus.arrival_time%></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ticket Created At:</strong></td>
+                    <td><%= @ticket.created_at %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ticket Updated At:</strong></td>
+                    <td><%= @ticket.created_at %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ticket Status:</strong></td>
+                    <td><%= @ticket.status %></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="card-footer text-body-secondary">
+                <%=time = Time.now.to_s 
+                     time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+                <%= time %>
+              </div>
+            </div>
+          </body>
+        </html>

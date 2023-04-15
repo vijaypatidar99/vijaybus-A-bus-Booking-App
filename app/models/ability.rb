@@ -12,7 +12,7 @@ class Ability
       can :manage, Ticket
       can :manage, :cancelled_tickets
     else
-      can :read, Bus
+      can [:read,:search], Bus
       can :read, Route
       can [:read, :create, :cancel_ticket], Ticket
       can :read, :my_tickets

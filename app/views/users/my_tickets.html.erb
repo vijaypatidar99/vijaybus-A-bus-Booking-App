@@ -1,49 +1,56 @@
 <div class="card text-center">
   <div class="card-header">
-    <h1>My Tickets</h1>
+    <h1 class="mb-0">My Tickets</h1>
   </div>
   <div class="card-body">
     <% if @user.tickets.present? %>
-      <h3>Total Tickets - <%= @user.tickets.count %> </h3>
-      <table class="table table-bordered table-striped">
-        <tr>
-          <th>Ticket ID</th>
-          <th>Passenger Name</th>
-          <th>Passenger Age</th>
-          <th>Passenger Sex</th>
-          <th>Bus fare</th>
-          <th>Pickup Point</th>
-          <th>Drop Point</th>
-          <th>Departure Time</th>
-          <th>Arrival Time</th>
-          <th>Ticket status</th>
-          <th>View Details</th>
-          <th>Cancel Ticket</th>
-        </tr>
-        <% @ticket.each do |ticket| %>
-          <tr>
-            <td><%= ticket.id %></td>
-            <td><%= ticket.name %></td>
-            <td><%= ticket.age %></td>
-            <td><%= ticket.sex %></td>
-            <td><%= ticket.price %></td>
-            <td><%= ticket.bus.pickup %></td>
-            <td><%= ticket.bus.drop %></td>
-            <td><%= ticket.bus.departure_time %></td>
-            <td><%= ticket.bus.arrival_time %></td>
-            <td><%= ticket.status %></td>
-            <td><%= link_to 'View Ticket Details', ticket_path(ticket) ,class:"btn btn-info"%></td>
-            <td><%= link_to 'Cancel Ticket', bus_ticket_cancel_ticket_path(ticket.bus_id,ticket), data: {method: :cancel_ticket,turbo_confirm: "Are you sure to cancel this ticket?" } ,class:"btn btn-info"%></td>
-          </tr>
-        <%end%>
-      </table >
+      <div class="table-responsive">
+        <h3 class="mb-4">Total Tickets - <%= @user.tickets.count %></h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Ticket ID</th>
+              <th>Passenger Name</th>
+              <th>Passenger Age</th>
+              <th>Passenger Sex</th>
+              <th>Bus fare</th>
+              <th>Pickup Point</th>
+              <th>Drop Point</th>
+              <th>Departure Time</th>
+              <th>Arrival Time</th>
+              <th>Ticket status</th>
+              <th>View Details</th>
+              <th>Cancel Ticket</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @ticket.each do |ticket| %>
+              <tr>
+                <td><%= ticket.id %></td>
+                <td><%= ticket.name %></td>
+                <td><%= ticket.age %></td>
+                <td><%= ticket.sex %></td>
+                <td><%= ticket.price %></td>
+                <td><%= ticket.bus.pickup %></td>
+                <td><%= ticket.bus.drop %></td>
+                <td><%= ticket.bus.departure_time %></td>
+                <td><%= ticket.bus.arrival_time %></td>
+                <td><%= ticket.status %></td>
+                <td><%= link_to 'View Ticket Details', ticket_path(ticket), class: "btn btn-info btn-sm"%></td>
+                <td><%= link_to 'Cancel Ticket', bus_ticket_cancel_ticket_path(ticket.bus_id, ticket), data: { method: :cancel_ticket, turbo_confirm: "Are you sure to cancel this ticket?" }, class: "btn btn-danger btn-sm" %></td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="card-footer text-body-secondary">
-      <%=time = Time.now.to_s
-      time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M")
-      %>
+      <% time = Time.now.to_s %>
+      <%= "Updated on #{DateTime.parse(time).strftime("%d/%m/%Y %H:%M")}" %>
     </div>
   </div>
-<%else%>
-  <p>You have no tickets.</p>
-<%end%>
+<% else %>
+  <div class="card-body">
+    <p class="mb-0">You have no tickets.</p>
+  </div>
+<% end %>

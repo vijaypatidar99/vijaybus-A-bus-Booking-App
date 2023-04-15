@@ -1,0 +1,7 @@
+<%= form_with(url: cancel_bus_ticket_path(@ticket), method: 'post') do |form| %>
+  <div class="form-group">
+    <%= form.label :cancel_reason, "Reason for cancellation" %>
+    <%= form.text_field :cancel_reason, class: "form-control", required: true %>
+  </div>
+  <%= form.submit "Cancel ticket", class: "btn btn-danger" %>
+<% end %>

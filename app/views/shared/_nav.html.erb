@@ -10,12 +10,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        <% if current_user.try(:admin?) %>
+        <li class="nav-item">
+          <%=link_to "Add Bus", new_bus_path, class:"nav-link active"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to "Add Route", new_route_path, class:"nav-link active"%>
+        </li>
+        <%end%>
       </ul>
       <div class="d-flex" role="search">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <%if user_signed_in?%>
             <% if current_user.try(:admin?) %>
-            <%# if can?(:manage, ticket) %>
+              <%# if can?(:manage, ticket) %>
+               <%= link_to 'All Bookings', tickets_all_bookings_path, class:"btn btn-info"%>
               <%= link_to 'Cancel Tickets', cancelled_tickets_path, class:"btn btn-info"%>
               <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
             <%else%>

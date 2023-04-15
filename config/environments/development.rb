@@ -72,21 +72,9 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
- # config.action_mailer.performa_deliveries = true
- config.action_mailer.delivery_method = :smtp
-#  ActionMailer::Base.smtp_settings = {
-#   :user_name => 'vijay patidar', # This is the string literal 'apikey', NOT the ID of your API key
-#   :password => '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', # This is the secret sendgrid API key which was issued during API key creation
-#   :address => 'smtp.sendgrid.net',
-#   :port => 587,
-#   :authentication => :plain,
-#   :enable_starttls_auto => true
-# }
-ActionMailer::Base.smtp_settings = {
-  address:        "smtp.sendgrid.net",
-  port:            587,
-  authentication: :plain,
-  user_name:      'vijay',
-  password:       ENV['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']
-}
+  # config.action_mailer.performa_deliveries = true
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+ 
+
 end

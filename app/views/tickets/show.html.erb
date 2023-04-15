@@ -1,8 +1,8 @@
-<div class="container-sm">
+<div class="container">
   <div class="card text-center">
     <div class="card-header">
-      Welcome to <%=@ticket.bus.name%>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <h3 class="mb-0">Welcome to <%=@ticket.bus.name%></h3>
+      <div class="d-flex justify-content-center justify-content-md-end">
         <%if @ticket.Confirmed? %>
           <button type="button" class="btn btn-outline-success">Confirmed Ticket</button>
         <%elsif @ticket.Rejected?%>
@@ -15,66 +15,79 @@
       </div>
     </div>
     <div class="card-body">
-      <title>Ticket</title>
-      <body>
-        <ul>
-          <h1>Ticket Information</h1>
-        </ul>
-        <table>
-          <tr>
-            <td><strong>Ticket ID:</strong></td>
-            <td><%= @ticket.id %></td>
-          </tr>
-          <tr>
-            <td><strong>Passenger Name:</strong></td>
-            <td><%= @ticket.name %></td>
-          </tr>
-          <tr>
-            <td><strong>Passenger Age:</strong></td>
-            <td><%= @ticket.age %></td>
-          </tr>
-          <tr>
-            <td><strong>Passenger Sex:</strong></td>
-            <td><%= @ticket.sex %></td>
-          </tr>
-          <tr>
-            <td><strong>Bus Fare:</strong></td>
-            <td><%= @ticket.price %></td>
-          </tr>
-          <tr>
-            <td><strong>Pickup Point:</strong></td>
-            <td><%= @ticket.bus.pickup %></td>
-          </tr>
-          <tr>
-            <td><strong>Drop Point:</strong></td>
-            <td><%= @ticket.bus.drop %></td>
-          </tr>
-          <tr>
-            <td><strong>Bus Departure Date & Time:</strong></td>
-            <td><%= @ticket.bus.departure_time %></td>
-          </tr>
-          <tr>
-            <td><strong>Bus Arrival Date & Time:</strong></td>
-            <td><%= @ticket.bus.arrival_time%></td>
-          </tr>
-          <tr>
-            <td><strong>Ticket Created At:</strong></td>
-            <td><%= @ticket.created_at %></td>
-          </tr>
-          <tr>
-            <td><strong>Ticket Updated At:</strong></td>
-            <td><%= @ticket.created_at %></td>
-          </tr>
-          <tr>
-            <td><strong>Ticket Status:</strong></td>
-            <td><%= @ticket.status %></td>
-          </tr>
-        </table>
+      <h2 class="mb-3">Ticket Information</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th>Ticket ID:</th>
+              <td><%= @ticket.id %></td>
+            </tr>
+             <tr>
+              <th>Bus ID:</th>
+              <td><%= @ticket.bus_id %></td>
+            </tr>
+            <tr>
+              <th>Passenger Name:</th>
+              <td><%= @ticket.name %></td>
+            </tr>
+            <tr>
+              <th>Passenger Age:</th>
+              <td><%= @ticket.age %></td>
+            </tr>
+            <tr>
+              <th>Passenger Sex:</th>
+              <td><%= @ticket.sex %></td>
+            </tr>
+            <tr>
+              <th>Bus Fare:</th>
+              <td><%= @ticket.price %></td>
+            </tr>
+            <tr>
+              <th>Pickup Point:</th>
+              <td><%= @ticket.bus.pickup %></td>
+            </tr>
+            <tr>
+              <th>Drop Point:</th>
+              <td><%= @ticket.bus.drop %></td>
+            </tr>
+            <tr>
+              <th>Bus Departure Date & Time:</th>
+              <td><%= @ticket.bus.departure_time %></td>
+            </tr>
+            <tr>
+              <th>Bus Arrival Date & Time:</th>
+              <td><%= @ticket.bus.arrival_time%></td>
+            </tr>
+            <tr>
+              <th>Ticket Created At:</th>
+              <td><%= @ticket.created_at %></td>
+            </tr>
+            <tr>
+              <th>Ticket Updated At:</th>
+              <td><%= @ticket.created_at %></td>
+            </tr>
+            <tr>
+              <th>Ticket Status:</th>
+              <td><%= @ticket.status %></td>
+            </tr>
+            <%if @ticket.Cancelled?%>
+              <tr>
+                <th>Cancel Reasons</th>
+                <td><%= @ticket.cancel_reason %></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="card-footer text-body-secondary">
+      <div class="card-footer text-muted">
         <%=time = Time.now.to_s 
-        time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
+      time = DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
       </div>
     </div>
-    <%=link_to "print ticket",'#',class:"btn btn-primary",onclick: "window.print()"%>
+    <div class="d-flex justify-content-center justify-content-md-end mt-3">
+      <%=link_to "Print Ticket",'#',class:"btn btn-primary mr-md-2",onclick: "window.print()"%>
+     
+    </div>
   </div>
