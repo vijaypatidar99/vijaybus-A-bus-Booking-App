@@ -93,4 +93,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
+  production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
 end
