@@ -17,5 +17,7 @@ module Vijaybus
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    ENV['RACK_ENV'] = 'deployment'
+    port = ENV.fetch('PORT', 3000)
   end
 end
