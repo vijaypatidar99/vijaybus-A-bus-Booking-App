@@ -37,8 +37,14 @@ workers ENV.fetch("WEB_CONCURRENCY") { 4 }
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
+app_dir = '/opt/app/www.yoursite.com/current'
+directory app_dir
+rackup "#{app_dir}/config.ru"
+
  preload_app!
 
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+

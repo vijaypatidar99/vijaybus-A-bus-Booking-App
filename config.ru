@@ -4,3 +4,4 @@ require_relative "config/environment"
 
 run Rails.application
 Rails.application.load_server
+RAILS_ENV=production bundle exec puma -C config/puma.rb config.ru
