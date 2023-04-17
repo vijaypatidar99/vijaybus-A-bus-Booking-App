@@ -1,15 +1,14 @@
 <h1> Enter Passenger Details </h1>
 <div class="container">
   <%= form_with model: [@bus, @ticket]  do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :name, "Enter Passenger Name" %>
-    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.text_field :name, class: 'form-control' ,required: true%>
     <%= f.label :age,"Enter Passenger Age" %>
-    <%= f.text_field :age, class: 'form-control' %>
+    <%= f.text_field :age, class: 'form-control', required: true%>
     <%= f.label :sex,"Enter Passenger Sex "%>
-    <%= f.select :sex,  ['Male', 'Female', 'Other'], class: 'form-control' %>
+    <%= f.select :sex,  ['Male', 'Female', 'Other'], class: 'form-control', required: true%>
     <%= f.label :date, "Enter Journey date" %>
-    <%= f.date_field :date %>
+    <%= f.date_field :date ,required: true%>
     <%= f.hidden_field :price, value: @bus.price %>
     <%= f.hidden_field :bus_id, value: @bus.id %>
     <%= f.hidden_field :departure_time, value: @bus.departure_time%>

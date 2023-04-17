@@ -52,15 +52,22 @@ class BusesController < ApplicationController
   end
 
   def search
-    @from = params[:from]
-    @to = params[:to]
-    @buses = Bus.where(starting_city: @from, destination_city: @to)
+    @buses = Bus.all
+    if params[:from].present?
+      @buses = @buses.where(starting_city: params[:from])
+    end
+    if params[:to].present?
+      @buses = @buses.where(destination_city: params[:to])
+    end
+    if params[:dates].present?
+      @buses = @buses.where(dates: params[:dates])
+    end
   end
 
   private
 
   def bus_params
-    params.require(:bus).permit(:starting_city, :destination_city, :name, :number, :bustype, :price, :seats, :route_id, :drop, :pickup, :departure_time, :arrival_time, date: [])
+    params.require(:bus).permit(:starting_city, :destination_city, :name, :number, :bustype, :price, :seats, :route_id, :drop, :pickup, :departure_time, :arrival_time, dates: [])
   end
 
   def logged_in_user

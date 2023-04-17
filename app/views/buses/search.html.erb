@@ -1,26 +1,47 @@
 <% if @buses.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Starting City</th>
-        <th>Destination City</th>
-        <th>Departure Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @buses.each do |bus| %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= bus.route.id %></td>
-          <td><%= bus.starting_city %></td>
-          <td><%= bus.destination_city %></td>
-          <td><%= bus.departure_time %></td>
+          <th>Route Id</th>
+          <th>Bus Id</th>
+          <th>Bus Starting</th>
+          <th>Bus Destination</th>
+          <th>Name</th>
+          <th>Bus Number</th>
+          <th>Bus Type</th>
+          <th>Bus Price</th>
+          <th>Seat Availability</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+          <th>Actions</th>
         </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td colspan="4">No buses found for this route</td>
-      </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @buses.each do |bus| %>
+          <tr>
+            <td><%= bus.route.id %></td>
+            <td><%= bus.id %></td>
+            <td><%= bus.starting_city %></td>
+            <td><%= bus.destination_city %></td>
+            <td><%= bus.name %></td>
+            <td><%= bus.number %></td>
+            <td><%= bus.bustype %></td>
+            <td><%= bus.price %></td>
+            <td><%= bus.seats %></td>
+            <% if bus.departure_time.present? && bus.arrival_time.present? %>
+              <td><%= bus.departure_time.strftime('%H:%M') %></td>
+              <td><%= bus.arrival_time.strftime('%H:%M') %></td>
+            <% else %>
+              <td><%= bus.departure_time %></td>
+              <td><%= bus.arrival_time %></td>
+            <% end %>
+            <td><%= link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>No buses found for this route</p>
 <% end %>

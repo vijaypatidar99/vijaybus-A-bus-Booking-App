@@ -17,8 +17,11 @@
 #     Route.update(bus_id:3)
 # end
 
+# for i in 1..10
+#     Route.create(from:"city#{i}",to:"city#{i+1}",first_bus:"09:00 AM",last_bus:"09:00 PM")
+# end
 
-for i in 1..5
-    Bus.create(name:"Bus-#{i}",number:"MP 04 #{i+1}43",price:300,seats:30,route_id:21)
-end
-
+# for i in 2..50
+#     bus = Bus.find(i)
+#     bus.update(dates:"[\"\", \"2023-04-17\", \"2023-04-18\", \"2023-04-19\", \"2023-04-20\", \"2023-04-21\", \"2023-04-22\", \"2023-04-23\"]")
+# end

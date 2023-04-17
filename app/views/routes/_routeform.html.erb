@@ -1,13 +1,13 @@
 <%= form_with model: @route, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :from,"Enter Starting City" %>
-  <%= f.text_field :from, class: 'form-control' %>
+  <%= f.text_field :from, class: 'form-control', required: true %>
   <%= f.label :to, "Enter Destination City" %>
-  <%= f.text_field :to, class: 'form-control' %>
+  <%= f.text_field :to, class: 'form-control', required: true %>
   <%= f.label :first_bus, "Enter first Bus Time" %>
-  <%= f.text_field :first_bus, class: 'form-control' %>
+  <%= f.text_field :first_bus, class: 'form-control', required: true %>
   <%= f.label :last_bus ,"Enter last Bus Time"%>
-  <%= f.text_field :last_bus, class: 'form-control' %>
+  <%= f.text_field :last_bus, class: 'form-control', required: true %>
   <%= f.label :bus_id, "Enter Bus ID Associated with this Route"%>
   <%= f.text_field :bus_id, class: 'form-control' %>
   <%= f.submit "Save Bus Route", class: "btn btn-primary" %>

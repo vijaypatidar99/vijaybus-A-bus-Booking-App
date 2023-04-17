@@ -54,9 +54,8 @@ class TicketsController < ApplicationController
   end
 
   def approve_ticket
-    #authorize! :approve_ticket, @ticket
     @ticket = Ticket.find(params[:ticket_id])
-    if @ticket.update(status: :Confirmed)
+    if @ticket.status != "Confirmed" && @ticket.update(status: :Confirmed)
       bus = Bus.find(@ticket.bus.id)
       bus.seats -= 1
       bus.save
@@ -70,9 +69,8 @@ class TicketsController < ApplicationController
   end
 
   def reject_ticket
-    #authorize! :reject_ticket, @ticket
     @ticket = Ticket.find(params[:ticket_id])
-    if @ticket.update(status: :Rejected)
+    if @ticket.status != "Rejected" && @ticket.update(status: :Rejected)
       bus = @ticket.bus
       bus.seats += 1
       bus.save
@@ -81,7 +79,7 @@ class TicketsController < ApplicationController
       TicketMailer.send_email(@ticket).deliver_now
     else
       flash[:error] = "Failed to reject ticket"
-      redirect_to request.referrer
+      render :show
     end
   end
 
