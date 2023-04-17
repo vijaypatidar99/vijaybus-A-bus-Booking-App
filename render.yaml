@@ -1,14 +1,14 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: vijaybus
+    databaseName: vijaybus
+    user: vijaypatidar
 
 services:
   - type: web
-    name: mysite
+    name: vijaybus
     env: ruby
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    buildCommand: "./render-build.sh"
+    startCommand: "bundle exec rails s"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
