@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bus_id: 1
+  route_id: 1
+  journey_date: 2023-04-17
+
+two:
+  bus_id: 1
+  route_id: 1
+  journey_date: 2023-04-17

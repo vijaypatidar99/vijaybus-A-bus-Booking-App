@@ -5,6 +5,10 @@ class Route < ApplicationRecord
   self.per_page = 12
   default_scope -> { order(created_at: :desc) }
 
+  def display_name
+    "#{from} -  #{to}"
+  end
+
   private
 
   def start_and_end_points_are_unique

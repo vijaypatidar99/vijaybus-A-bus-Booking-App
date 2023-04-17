@@ -85,16 +85,20 @@ class TicketsController < ApplicationController
 
   def cancel_ticket
     @ticket = Ticket.find(params[:ticket_id])
-    if request.post?
-      cancel_reason = params[:cancel_reason]
-      @ticket.update(status: "Cancelled", cancel_reason: cancel_reason)
-      bus = @ticket.bus
-      bus.seats += 1
-      bus.save
-      redirect_to my_tickets_path, notice: "Ticket was successfully cancelled."
-      TicketMailer.send_email(@ticket).deliver_now
+    if @ticket.status != "Cancelled"
+      if request.post?
+        cancel_reason = params[:cancel_reason]
+        @ticket.update(status: "Cancelled", cancel_reason: cancel_reason)
+        bus = @ticket.bus
+        bus.seats += 1
+        bus.save
+        redirect_to my_tickets_path, notice: "Ticket was successfully cancelled."
+        TicketMailer.send_email(@ticket).deliver_now
+      else
+        render "tickets/cancel_ticket_form"
+      end
     else
-      render "tickets/cancel_ticket_form"
+      redirect_to request.referrer , notice: "Ticket already cancelled."
     end
   end
 

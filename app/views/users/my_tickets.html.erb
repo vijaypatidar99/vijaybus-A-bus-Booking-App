@@ -3,9 +3,9 @@
     <h1 class="mb-0">My Tickets</h1>
   </div>
   <div class="card-body">
-    <% if @user.tickets.present? %>
+    <% if current_user.tickets.present? %>
       <div class="table-responsive">
-        <h3 class="mb-4">Total Tickets - <%= @user.tickets.count %></h3>
+        <h3 class="mb-4">Total Tickets - <%= current_user.tickets.count %></h3>
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @ticket.each do |ticket| %>
+            <% current_user.tickets.each do |ticket| %>
               <tr>
                 <td><%= ticket.id %></td>
                 <td><%= ticket.name %></td>
@@ -37,7 +37,9 @@
                 <td><%= ticket.bus.arrival_time %></td>
                 <td><%= ticket.status %></td>
                 <td><%= link_to 'View Ticket Details', ticket_path(ticket), class: "btn btn-info btn-sm"%></td>
+                 <%if ticket.status != "Confirmed" || ticket.status != "Rejected" %>
                 <td><%= link_to 'Cancel Ticket', bus_ticket_cancel_ticket_path(ticket.bus_id, ticket), data: { method: :cancel_ticket, turbo_confirm: "Are you sure to cancel this ticket?" }, class: "btn btn-danger btn-sm" %></td>
+                <%end%>
               </tr>
             <%end%>
           </tbody>

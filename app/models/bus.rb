@@ -4,5 +4,5 @@ class Bus < ApplicationRecord
   self.per_page = 12
   default_scope -> { order(created_at: :desc) }
   validates :name, :number, presence: true, uniqueness: true
-  validates :seats, :pickup, :drop, :departure_time, :arrival_time, :starting_city, :destination_city, :price, :dates, presence: true
+  validates :seats, :pickup, :drop, :departure_time, :arrival_time, :price, :dates, presence: true
 end

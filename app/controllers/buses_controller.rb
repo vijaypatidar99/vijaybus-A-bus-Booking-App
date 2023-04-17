@@ -1,6 +1,6 @@
 class BusesController < ApplicationController
   authorize_resource
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def index
     @route = Route.find(params[:route_id])
@@ -25,6 +25,7 @@ class BusesController < ApplicationController
     end
     if @bus.save
       flash[:success] = "Bus Added successfully"
+      @bus.update(starting_city:@bus.route.from,destination_city:@bus.route.to)
       redirect_to root_path
     else
       render "new"
@@ -68,12 +69,5 @@ class BusesController < ApplicationController
 
   def bus_params
     params.require(:bus).permit(:starting_city, :destination_city, :name, :number, :bustype, :price, :seats, :route_id, :drop, :pickup, :departure_time, :arrival_time, dates: [])
-  end
-
-  def logged_in_user
-    unless user_signed_in?
-      flash[:danger] = "Please sign up or sign in"
-      redirect_to new_user_registration_path
-    end
   end
 end
