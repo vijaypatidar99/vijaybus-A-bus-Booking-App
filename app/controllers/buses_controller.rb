@@ -17,6 +17,7 @@ class BusesController < ApplicationController
 
   def create
     @bus = Bus.new(bus_params)
+    @bus.update(starting_city: @bus.route.from, destination_city: @bus.route.to)
     dates = params[:bus][:dates]
     if dates.present?
       @bus.dates = dates.reject(&:empty?).map(&:strip).join(", ")
@@ -25,7 +26,6 @@ class BusesController < ApplicationController
     end
     if @bus.save
       flash[:success] = "Bus Added successfully"
-      @bus.update(starting_city:@bus.route.from,destination_city:@bus.route.to)
       redirect_to root_path
     else
       render "new"
