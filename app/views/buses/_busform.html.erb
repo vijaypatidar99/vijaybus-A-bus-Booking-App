@@ -24,9 +24,17 @@
   <%= f.label :departure_time,"Enter Departure Time"%>
   <%= f.text_field :departure_time, class: 'form-control' , required: true%>
   <%= f.label :arrival_time,"Enter Arrival Time"%>
-  <%= f.text_field :arrival_time, class: 'form-control', required: true %>
+  <%= f.text_field :arrival_time, class: 'form-control', required: true %><br>
+
+  <%#= form_with model: @schedule do |f| %>
+    <%#= f.hidden_field :bus_id, value: @bus.id %>
+    <%#= f.hidden_field :route_id, value: @bus.route_id %>
+  <%#end%>
+
   <%= f.submit "Save Bus", class: "btn btn-primary" %>
 <%end %>
+
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var select = document.querySelector('select[name="bus[dates][]"]');
