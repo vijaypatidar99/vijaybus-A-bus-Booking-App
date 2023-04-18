@@ -1,51 +1,51 @@
-<%= form_with model: @bus do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <%= f.label :name, "Enter Bus Name" %>
-  <%= f.text_field :name, class: 'form-control' , required: true%>
-  <%= f.label :number,"Enter Bus number" %>
-  <%= f.text_field :number, class: 'form-control', required: true %>
-  <%= f.label :bustype,"Enter Bus Type" %>
-  <%= f.text_field :bustype, class: 'form-control' , required: true%>
-  <%= f.label :price, "Enter Bus Fare" %>
-  <%= f.text_field :price, class: 'form-control' , required: true%>
-  <%= f.label :seats, "Enter Available Seats"%>
-  <%= f.text_field :seats, class: 'form-control', required: true %>
-  <%#= f.label :route_id,"Enter Route ID"%>
-  <%#= f.text_field :route_id, class: 'form-control' , required: true%>
-  <%= f.label :route_id, "Select a route" %>
-  <%= f.collection_select :route_id, Route.all, :id, :display_name %><br>
-  <%= f.label :dates, "Dates (select multiple)" %>
-  <%= f.select :dates, options_for_select((Date.today..2.weeks.from_now).map{ |date| [date.to_s, date.to_s] }), {}, multiple: true , class: 'form-control' , required: true %><br>
-  <div id="selected-dates"></div>
-  <%= f.label :pickup,"Enter Pickup Point"%>
-  <%= f.text_field :pickup, class: 'form-control', required: true %>
-  <%= f.label :drop,"Enter Drop Point"%>
-  <%= f.text_field :drop, class: 'form-control', required: true %>
-  <%= f.label :departure_time,"Enter Departure Time"%>
-  <%= f.text_field :departure_time, class: 'form-control' , required: true%>
-  <%= f.label :arrival_time,"Enter Arrival Time"%>
-  <%= f.text_field :arrival_time, class: 'form-control', required: true %><br>
-
-  <%= form_with model: @schedule do |f| %>
-    <%= f.hidden_field :bus_id, value: @bus.id %>
-    <%= f.hidden_field :route_id, value: @bus.route_id %>
-  <%end%>
-  
-  <%= f.submit "Save Bus", class: "btn btn-primary" %>
-<%end %>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var select = document.querySelector('select[name="bus[dates][]"]');
-    var output = document.getElementById('selected-dates');
-    select.addEventListener('change', function() {
-      output.textContent = '';
-      var options = select.selectedOptions;
-      for (var i = 0; i < options.length; i++) {
-        var date = options[i].value;
-        output.textContent += date + ', ';
-      }
+<div class="card container ">
+  <%= form_with model: @bus do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :name, "Enter Bus Name" %>
+    <%= f.text_field :name, class: 'form-control' , required: true%>
+    <%= f.label :number,"Enter Bus number" %>
+    <%= f.text_field :number, class: 'form-control', required: true %><br>
+    <%= f.label :bustype,"Select Bus Type "%>
+    <%= f.select :bustype,  ['AC' ,'Non-AC', 'Volvo', 'Sleeper' ,'Semi-sleeper','Luxury'], class: 'form-control', required: true%><br>
+    <br>
+    <%= f.label :price, "Enter Bus Fare" %>
+    <%= f.text_field :price, class: 'form-control' , required: true%>
+    <%= f.label :seats, "Enter Available Seats"%>
+    <%= f.text_field :seats, class: 'form-control', required: true %><br>
+    <br>
+    <%#= f.label :route_id, "Select a route" %>
+    <%#= f.collection_select :route_id, Route.all, :id, :display_name %><br>
+    <%= f.label :dates, "Dates (select multiple)" %>
+    <%= f.select :dates, options_for_select((Date.today..2.weeks.from_now).map{ |date| [date.to_s, date.to_s] }), {}, multiple: true , class: 'form-control' , required: true %><br>
+    <div id="selected-dates"></div>
+    <br>
+    <%= f.label :pickup,"Enter Pickup Point"%>
+    <%= f.text_field :pickup, class: 'form-control', required: true %>
+    <%= f.label :drop,"Enter Drop Point"%>
+    <%= f.text_field :drop, class: 'form-control', required: true %>
+    <%= f.label :departure_time,"Enter Departure Time"%>
+    <%= f.text_field :departure_time, class: 'form-control' , required: true%>
+    <%= f.label :arrival_time,"Enter Arrival Time"%>
+    <%= f.text_field :arrival_time, class: 'form-control', required: true %><br>
+    <%#= f.fields_for :schedule  do |fn| %>
+      <%#= fn.label :route_id, "Select a route" %>
+      <%#= fn.collection_select :route_id, Route.all, :id, :display_name %><br>
+    <%#end%>
+    <%= f.submit "Save Bus", class: "btn btn-primary" %><br>
+    <br>
+  <%end %>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var select = document.querySelector('select[name="bus[dates][]"]');
+      var output = document.getElementById('selected-dates');
+      select.addEventListener('change', function() {
+        output.textContent = '';
+        var options = select.selectedOptions;
+        for (var i = 0; i < options.length; i++) {
+          var date = options[i].value;
+          output.textContent += date + ', ';
+        }
+      });
     });
-  });
-</script>
+  </script>
+</div>

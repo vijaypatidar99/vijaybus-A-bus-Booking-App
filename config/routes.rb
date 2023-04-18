@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "routes#index"
   get "buses/search"
   get "tickets/all_bookings"
+  
   get "my_tickets", to: "users#my_tickets"
   get "cancelled_tickets", to: "tickets#cancelled_tickets"
   post "cancel_bus_ticket/:ticket_id", to: "tickets#cancel_ticket", as: "cancel_bus_ticket"
@@ -19,4 +20,5 @@ Rails.application.routes.draw do
   resources :routes do
     resources :buses
   end
+  resources :schedules
 end

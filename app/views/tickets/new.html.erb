@@ -10,15 +10,14 @@
     <%= f.select :sex,  ['Male', 'Female', 'Other'], class: 'form-control', required: true%>
     <%= f.label :date, "Enter Journey date" %>
     <%= f.date_field :date ,required: true%>
-    <%= f.hidden_field :price, value: @bus.price %>
+     <%= f.hidden_field :price, value: @bus.price %>
+    <%= f.hidden_field :route_id, value: @bus.route_id %>
     <%= f.hidden_field :bus_id, value: @bus.id %>
     <%= f.hidden_field :departure_time, value: @bus.departure_time%>
     <%= f.hidden_field :arrival_time, value: @bus.arrival_time %>
-
-     <%= form_with model: @schedule do |f| %>
-       <%= f.hidden_field :date, value: @bus.date %>
-     <%end%>
-
+    <%#= form_with model: @bus.schedules.new do |f| %>
+      <%#= f.hidden_field :date, value: @bus.date %>
+    <%#end%>
     <div class="form-group">
       <%= f.submit "Save Passenger Details", class: "btn btn-primary" %>
     </div>

@@ -25,6 +25,7 @@ class TicketsController < ApplicationController
   end
 
   def create
+
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.status = :Pending
@@ -114,6 +115,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:name, :age, :sex, :bus_id, :price, :departure_time, :arrival_time, :date)
+    params.require(:ticket).permit(:name, :age, :sex, :bus_id, :route_id, :price, :departure_time, :arrival_time, :date)
   end
 end

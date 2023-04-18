@@ -27,6 +27,10 @@
               <th>Bus ID:</th>
               <td><%= @ticket.bus_id %></td>
             </tr>
+             <tr>
+                <th>Bus Route </th>
+                <td><%= @ticket.route.from%> to <%= @ticket.route.to%>  </td>
+              </tr>
             <tr>
               <th>Passenger Name:</th>
               <td><%= @ticket.name %></td>
@@ -51,13 +55,17 @@
               <th>Drop Point:</th>
               <td><%= @ticket.bus.drop %></td>
             </tr>
-            <tr>
-              <th>Bus Departure Date & Time:</th>
-              <td><%= @ticket.bus.departure_time %></td>
+             <tr>
+              <th>Journey Date:</th>
+              <td><%= @ticket.date %></td>
             </tr>
             <tr>
-              <th>Bus Arrival Date & Time:</th>
-              <td><%= @ticket.bus.arrival_time%></td>
+              <th>Bus Departure  Time:</th>
+              <td><%= @ticket.bus.departure_time.strftime(" %H:%M") %></td>
+            </tr>
+            <tr>
+              <th>Bus Arrival Time:</th>
+              <td><%= @ticket.bus.arrival_time.strftime(" %H:%M")%></td>
             </tr>
             <tr>
               <th>Ticket Created At:</th>

@@ -8,14 +8,14 @@
         <ul>
           <h3> Dear <%=@ticket.name%>,</h3>
           <%if @ticket.Confirmed? %>
-            <h4> We are pleased to inform you that your bus ticket reservation for <%=@ticket.bus.route.from%> to  <%=@ticket.bus.route.to%> on  <%=@ticket.date%> has been accepted by our team.<br>
+            <h4> We are pleased to inform you that your bus ticket reservation for <%=@ticket.route.from%> to  <%=@ticket.route.to%> on  <%=@ticket.date%> has been accepted by our team.<br>
               Thank you for choosing VijayBus for your travel needs. We hope you have a safe and comfortable journey with us. <br>
               Best regards,<br>
               <b>Vijay Bus Service
               </ul>
             <%else%>
               <ul>
-                <h4> We regret to inform you that your bus ticket reservation for <%=@ticket.bus.route.from%> to  <%=@ticket.bus.route.to%> on  <%=@ticket.date%>has been rejected by our team.
+                <h4> We regret to inform you that your bus ticket reservation for <%=@ticket.route.from%> to  <%=@ticket.route.to%> on  <%=@ticket.date%>has been rejected by our team.
                   <br>
                   We apologize for any inconvenience this may cause. Please feel free to contact us if you have any questions or concerns. <br>
                   Best regards,<br>
@@ -29,6 +29,10 @@
                   <tr>
                     <td><strong>Ticket ID:</strong></td>
                     <td><%= @ticket.id %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Route :</strong></td>
+                    <td><%= @ticket.route.from %> to <%= @ticket.route.to %></td>
                   </tr>
                   <tr>
                     <td><strong>Passenger Name:</strong></td>
