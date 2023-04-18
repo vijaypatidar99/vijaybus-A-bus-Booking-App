@@ -1,6 +1,7 @@
 <h1> Enter Passenger Details </h1>
 <div class="container">
   <%= form_with model: [@bus, @ticket]  do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :name, "Enter Passenger Name" %>
     <%= f.text_field :name, class: 'form-control' ,required: true%>
     <%= f.label :age,"Enter Passenger Age" %>
