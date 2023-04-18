@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "favicon.ico", to: redirect("/assets/favicon.ico")
+  #get "favicon.ico", to: redirect("/assets/favicon.ico")
   root "routes#index"
   get "buses/search"
   get "tickets/all_bookings"
