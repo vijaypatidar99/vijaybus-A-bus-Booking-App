@@ -77,12 +77,11 @@ gem 'htmlbeautifier'
 gem "devise" 
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem 'prawn'
+
 
 #to send email
 gem "letter_opener", group: :development
 gem 'pg'
 gem 'cancancan'
 gem 'byebug'
-gem 'sendgrid-ruby'
 gem 'bootstrap', '~> 5.1.1'
