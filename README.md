@@ -3,15 +3,15 @@
 VijayBus is a web-based bus booking application built using Ruby on Rails framework. This application allows users to search for buses and book tickets for various routes. It also provides an admin dashboard to manage buses, routes, and ticket bookings.
 
 ## Features
-User authentication with email and password.
-User registration with email verification.
-Role-based access control with two roles - User and Admin.
-User can search for buses and routes.
-User can book tickets for a selected bus and route.
-User can print the ticket after booking.
-User can receive the e-ticket through email after booking.
-Admin can create new buses and routes.
-Admin can manage ticket bookings by accepting or rejecting them.
+1. User authentication with email and password.
+2. User registration with email verification.
+3. Role-based access control with two roles - User and Admin.
+4. User can search for buses and routes.
+5. User can book tickets for a selected bus and route.
+6. User can print the ticket after booking.
+7. User can receive the e-ticket through email after booking.
+8. Admin can create new buses and routes.
+9. Admin can manage ticket bookings by accepting or rejecting them.
 
 ## Usage
 
@@ -45,8 +45,8 @@ Also make sure you’re using a compatible version of Node.js:
 $ nvm install 16.13.0
 $ node -v
 v16.13.0
- $ ruby v-3.0.1
- $ rails v-7.0.4.3
+$ ruby v-3.0.1
+$ rails v-7.0.4.3
 ```
 
 Then install the needed packages (while skipping any Ruby gems needed only in production):
