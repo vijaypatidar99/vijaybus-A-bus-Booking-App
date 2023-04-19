@@ -17,7 +17,6 @@ class BusesController < ApplicationController
 
   def create
     @bus = Bus.new(bus_params)
-   # @bus.update(starting_city: @bus.route.from, destination_city: @bus.route.to)
     dates = params[:bus][:dates]
     if dates.present?
       @bus.dates = dates.reject(&:empty?).map(&:strip).join(", ")
@@ -61,13 +60,13 @@ class BusesController < ApplicationController
       @buses = @buses.where(destination_city: params[:to])
     end
     if params[:dates].present?
-      @buses = @buses.where(dates: params[:dates])
+      @schedule = Schedule.where(dates: params[:dates])
     end
   end
 
   private
 
   def bus_params
-    params.require(:bus).permit(:starting_city, :destination_city, :name, :number, :bustype, :price, :seats, :route_id, :drop, :pickup, :departure_time, :arrival_time, dates: [], schedule_attributes: [ :route_id])
+    params.require(:bus).permit(:starting_city, :destination_city, :name, :number, :bustype, :price, :seats, :drop, :pickup, :departure_time, :arrival_time)
   end
 end

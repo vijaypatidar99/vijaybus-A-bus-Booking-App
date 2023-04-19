@@ -2,7 +2,7 @@ class Bus < ApplicationRecord
   validates :name, :number, presence: true, uniqueness: true
 
   has_many :schedules
-  has_many :routes, through: :schedules
+  has_many :route, through: :schedules
   has_many :tickets, dependent: :destroy
 
   self.per_page = 12
@@ -13,4 +13,3 @@ class Bus < ApplicationRecord
     "#{name}-#{number}-#{id} "
   end
 end
-

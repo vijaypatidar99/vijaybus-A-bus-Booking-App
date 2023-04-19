@@ -34,8 +34,8 @@
                 <td><%= ticket.price %></td>
                 <td><%= ticket.bus.pickup %></td>
                 <td><%= ticket.bus.drop %></td>
-                <td><%= ticket.bus.departure_time %></td>
-                <td><%= ticket.bus.arrival_time %></td>
+                <td><%= ticket.bus.departure_time.strftime('%H:%M') %></td>
+                <td><%= ticket.bus.arrival_time.strftime('%H:%M') %></td>
                   <td><%= ticket.date %></td>
                 <td><%= ticket.status %></td>
                 <td><%= link_to 'View Ticket Details', ticket_path(ticket), class: "btn btn-info btn-sm"%></td>

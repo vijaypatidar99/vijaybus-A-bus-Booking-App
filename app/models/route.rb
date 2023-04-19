@@ -1,10 +1,8 @@
 class Route < ApplicationRecord
-   #has_many :buses
   has_many :schedules
-   has_many :buses, :through => :schedules
-
-  validates :from, :to, :first_bus, :last_bus, presence: true
-  #validate :start_and_end_points_are_unique
+  has_many :buses, :through => :schedules
+  validates :from, :to, presence: true
+  validate :start_and_end_points_are_unique
   self.per_page = 12
   default_scope -> { order(created_at: :desc) }
 

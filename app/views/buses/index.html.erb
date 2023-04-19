@@ -14,6 +14,7 @@
           <th>Drop Point</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
+          <th>Check Availability date</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -35,25 +36,32 @@
               <td><%= bus.departure_time %></td>
               <td><%= bus.arrival_time %></td>
             <% end %>
+            <% if can?(:manage, bus) %>
+              <td><%=bus.schedules.pluck(:dates)%></td>
+            <%end%>
             <td>
               <% if can?(:manage, bus) %>
                 <%= link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Bookings", bus_tickets_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %>
               <% else %>
-                <%= link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%>
+                <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
+                  <%= f.label :date, "Select a Date" %>
+                  <%= f.select :date, options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
+                <td><%= f.submit "Book Ticket", class:"btn btn-danger"%></td>
               <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <%= will_paginate @buses %>
-    </ul>
-  </nav>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <%= will_paginate @buses %>
+  </ul>
+</nav>
 <% else %>
   <h1>No Bus found in this Route</h1>
 <% end %>

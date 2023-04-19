@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_18_115540) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_19_105219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,11 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_18_115540) do
     t.datetime "departure_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "number"
-    t.integer "price"
-    t.integer "seats"
-    t.integer "route_id"
     t.string "bustype"
     t.string "pickup"
     t.string "drop"
@@ -49,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_18_115540) do
     t.date "journey_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "dates", default: [], array: true
   end
 
   create_table "tickets", force: :cascade do |t|

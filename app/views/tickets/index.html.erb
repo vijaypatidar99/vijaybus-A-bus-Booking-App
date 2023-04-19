@@ -15,10 +15,7 @@
                 <th>Passenger Age</th>
                 <th>Passenger Sex</th>
                 <th>Bus fare</th>
-                <th>Pickup Point</th>
-                <th>Drop Point</th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
+                <th>Journey Date</th>
                 <th>Ticket status</th>
                 <th>Actions</th>
               </tr>
@@ -31,16 +28,13 @@
                   <td><%= ticket.age %></td>
                   <td><%= ticket.sex %></td>
                   <td><%= ticket.price %></td>
-                  <td><%= ticket.bus.pickup %></td>
-                  <td><%= ticket.bus.drop %></td>
-                  <td><%= ticket.bus.departure_time.strftime("%H:%M") %></td>
-                  <td><%= ticket.bus.arrival_time.strftime("%H:%M") %></td>
+                  <td><%= ticket.date %></td>
                   <td><%= ticket.status %></td>
                   <td>
                     <%= link_to 'Details', ticket_path(ticket), class: "btn btn-info" %>
                     <%if ticket.status != "Cancelled"%>
-                    <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
-                    <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
+                      <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
+                      <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
                     <%end%>
                   </td>
                 </tr>

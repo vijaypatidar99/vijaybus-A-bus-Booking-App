@@ -1,7 +1,7 @@
 <%= render 'shared/slides' %>
 <%= render partial: "buses/search_form" %>
 <%= render 'shared/pagebreaker' %>
-<div class="card container">
+<div class="card container my-5">
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered table-striped">
@@ -10,8 +10,6 @@
             <th>Route ID</th>
             <th>Starting From</th>
             <th>Destination</th>
-            <th>First Bus</th>
-            <th>Last Bus</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -21,8 +19,7 @@
               <td><%= route.id %></td>
               <td><%= route.from %></td>
               <td><%= route.to %></td>
-              <td><%= route.first_bus %></td>
-              <td><%= route.last_bus %></td>
+    
               <td>
                 <% if can?(:manage, route) %>
                   <%= link_to "Update Route", edit_route_path(route), class: "btn btn-primary" %>

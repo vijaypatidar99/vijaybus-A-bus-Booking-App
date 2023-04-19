@@ -25,7 +25,6 @@ class TicketsController < ApplicationController
   end
 
   def create
-
     @ticket = Ticket.new(ticket_params)
     @ticket.user = current_user
     @ticket.status = :Pending
@@ -64,8 +63,7 @@ class TicketsController < ApplicationController
       redirect_to request.referrer
       TicketMailer.send_email(@ticket).deliver_now
     else
-      flash[:error] = "There was an error in approving the ticket."
-      render :show
+      redirect_to request.referrer, notice: "Ticket already Confirmed"
     end
   end
 
@@ -79,8 +77,7 @@ class TicketsController < ApplicationController
       redirect_to request.referrer
       TicketMailer.send_email(@ticket).deliver_now
     else
-      flash[:error] = "Failed to reject ticket"
-      render :show
+      redirect_to request.referrer, notice: "Ticket already rejected"
     end
   end
 
@@ -99,7 +96,7 @@ class TicketsController < ApplicationController
         render "tickets/cancel_ticket_form"
       end
     else
-      redirect_to request.referrer , notice: "Ticket already cancelled."
+      redirect_to request.referrer, notice: "Ticket already cancelled."
     end
   end
 

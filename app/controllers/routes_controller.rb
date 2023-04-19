@@ -47,6 +47,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:from, :to, :first_bus, :last_bus, :bus_id)
+    params.require(:route).permit(:from, :to)
   end
 end

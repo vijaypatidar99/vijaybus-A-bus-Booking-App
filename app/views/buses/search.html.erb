@@ -14,13 +14,14 @@
           <th>Seat Availability</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
+           <th>Select Date</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @buses.each do |bus| %>
           <tr>
-            <td><%= bus.route_id %></td>
+            <td><%= bus.route_ids %></td> 
             <td><%= bus.id %></td>
             <td><%= bus.starting_city %></td>
             <td><%= bus.destination_city %></td>
@@ -36,8 +37,12 @@
               <td><%= bus.departure_time %></td>
               <td><%= bus.arrival_time %></td>
             <% end %>
-            <td><%= link_to "Book Ticket", new_bus_ticket_path(bus), class:"btn btn-danger"%></td>
+          <td> <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
+                  <%= f.label :date, "Select a Date" %>
+                  <%= f.select :date, options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
+                <td><%= f.submit "Book Ticket", class:"btn btn-danger"%></td>
           </tr>
+          <%end%>
         <% end %>
       </tbody>
     </table>
