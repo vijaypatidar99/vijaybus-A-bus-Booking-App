@@ -39,7 +39,7 @@
                   <td><%= ticket.date %></td>
                 <td><%= ticket.status %></td>
                 <td><%= link_to 'View Ticket Details', ticket_path(ticket), class: "btn btn-info btn-sm"%></td>
-                 <%if ticket.status != "Confirmed" || ticket.status != "Rejected" %>
+                  <%if ticket.status != "Confirmed" && ticket.status != "Rejected" && ticket.status != "Cancelled"%>
                 <td><%= link_to 'Cancel Ticket', bus_ticket_cancel_ticket_path(ticket.bus_id, ticket), data: { method: :cancel_ticket, turbo_confirm: "Are you sure to cancel this ticket?" }, class: "btn btn-danger btn-sm" %></td>
                 <%end%>
               </tr>

@@ -1,6 +1,11 @@
 class SchedulesController < ApplicationController
-  before_action :sanitize_date_params, only: [:create,:update]
-  
+  before_action :sanitize_date_params, only: [:create, :update]
+  authorize_resource
+
+  def index
+    @schedules = Schedule.paginate(page: params[:page])
+  end
+
   def new
     @schedule = Schedule.new
   end
@@ -14,6 +19,26 @@ class SchedulesController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def edit
+    @schedule = Schedule.find(params[:id])
+  end
+
+  def update
+    @schedule = Schedule.find(params[:id])
+    if @schedule.update(schedule_params)
+      flash[:success] = "Schedule updated"
+      redirect_to root_path
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    Schedule.find(params[:id]).destroy
+    flash[:success] = "Schedule deleted"
+    redirect_to request.referrer
   end
 
   private

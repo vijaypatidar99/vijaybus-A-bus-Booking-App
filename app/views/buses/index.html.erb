@@ -14,7 +14,7 @@
           <th>Drop Point</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
-          <th>Check Availability date</th>
+          <th>Availability</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -37,7 +37,7 @@
               <td><%= bus.arrival_time %></td>
             <% end %>
             <% if can?(:manage, bus) %>
-              <td><%=bus.schedules.pluck(:dates)%></td>
+             <td> <%= select_tag "schedule_date", options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
             <%end%>
             <td>
               <% if can?(:manage, bus) %>

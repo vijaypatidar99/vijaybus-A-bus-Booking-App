@@ -3,7 +3,6 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Route Id</th>
           <th>Bus Id</th>
           <th>Bus Starting</th>
           <th>Bus Destination</th>
@@ -14,14 +13,13 @@
           <th>Seat Availability</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
-           <th>Select Date</th>
+          <th>Dates Available</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @buses.each do |bus| %>
           <tr>
-            <td><%= bus.route_ids %></td> 
             <td><%= bus.id %></td>
             <td><%= bus.starting_city %></td>
             <td><%= bus.destination_city %></td>
@@ -37,18 +35,25 @@
               <td><%= bus.departure_time %></td>
               <td><%= bus.arrival_time %></td>
             <% end %>
-          <td> <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
+            <% if can?(:manage, bus) %>
+             <td> <%= select_tag "schedule_date", options_for_select(bus.schedules.where(bus_id: bus.id).pluck(:dates).flatten) %></td>
+             <td> <%= link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
+              <%= link_to "Bookings", bus_tickets_path(bus), class:"btn btn-primary"%>
+              <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %></td>
+            <%else%>
+              <td> <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
                   <%= f.label :date, "Select a Date" %>
-                  <%= f.select :date, options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
-                <td><%= f.submit "Book Ticket", class:"btn btn-danger"%></td>
-          </tr>
-          <%end%>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-<% else %>
-  <div class="card-body">
-    <h1 >Sorry! No buses found for this route</h1>
-  </div>
-<% end %>
+                  <%= f.select :date, options_for_select(bus.schedules.where(bus_id: bus.id).pluck(:dates).flatten) %></td>
+                <td><%=f.submit "Book Ticket", class:"btn btn-danger"%></td>
+              </tr>
+            <%end%>
+            <%end%>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="card-body">
+      <h1 >Sorry! No buses found for this route</h1>
+    </div>
+  <% end %>

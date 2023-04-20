@@ -1,0 +1,15 @@
+<div class="card-body">
+  <%= form_with model: @schedule ,local: true do |f| %>
+    <%#= render 'shared/error_messages', object: f.object %>
+    <%= f.label :route_id, "Select a route" %>
+    <%= f.collection_select :route_id, Route.all, :id, :display_name %><br>
+    <br>
+    <%= f.label :bus_id, "Select a Bus" %>
+    <%= f.collection_select :bus_id, Bus.all, :id, :display_name %><br>
+    <br>
+    <%= f.label :dates, "Dates (select multiple)" %>
+    <%= f.select :dates, options_for_select((Date.today..2.weeks.from_now).map{ |date| [date.to_s, date.to_s] }), {}, multiple: true , class: 'form-control' , required: true %><br>
+    <div id="selected-dates"></div>
+    <%= f.submit "Save Schedule", class: "btn btn-primary" %><br>
+  <%end %>
+</div>

@@ -17,12 +17,6 @@ class BusesController < ApplicationController
 
   def create
     @bus = Bus.new(bus_params)
-    dates = params[:bus][:dates]
-    if dates.present?
-      @bus.dates = dates.reject(&:empty?).map(&:strip).join(", ")
-    else
-      @bus.dates = []
-    end
     if @bus.save
       flash[:success] = "Bus Added successfully"
       redirect_to root_path
@@ -60,6 +54,7 @@ class BusesController < ApplicationController
       @buses = @buses.where(destination_city: params[:to])
     end
     if params[:dates].present?
+      @schedule = Schedule.all
       @schedule = Schedule.where(dates: params[:dates])
     end
   end

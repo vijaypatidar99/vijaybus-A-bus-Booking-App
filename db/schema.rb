@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_105219) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_20_050147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,19 +23,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_105219) do
     t.string "bustype"
     t.string "pickup"
     t.string "drop"
-    t.integer "ticket_id"
     t.datetime "arrival_time"
-    t.text "dates"
+    t.integer "price"
+    t.integer "seats"
+    t.string "name"
+    t.string "number"
   end
 
   create_table "routes", force: :cascade do |t|
     t.string "from"
     t.string "to"
-    t.string "first_bus"
-    t.string "last_bus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "bus_id"
   end
 
   create_table "schedules", force: :cascade do |t|
