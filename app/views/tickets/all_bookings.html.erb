@@ -12,29 +12,30 @@
       <th>Actions</th>
     </tr>
     <% @tickets.each do |ticket| %>
-      
-        <tr>
-          <td><%= ticket.id %></td>
-          <td><%= ticket.bus.name %></td>
-          <td><%= ticket.name %></td>
-          <td><%= ticket.age %></td>
-          <td><%= ticket.sex %></td>
-          <td><%= ticket.date %></td>
-          <td><%= ticket.status %></td>
-          <td>
-            <% if can?(:manage, ticket) %>
-              <%= link_to 'Details', ticket_path(ticket), class: "btn btn-info" %>
-               <%if ticket.status != "Cancelled"&& ticket.status != "Rejected" && ticket.status != "Confirmed"%>
+      <tr>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.bus.name %></td>
+        <td><%= ticket.name %></td>
+        <td><%= ticket.age %></td>
+        <td><%= ticket.sex %></td>
+        <td><%= ticket.date %></td>
+        <td><%= ticket.status %></td>
+        <td>
+          <% if can?(:manage, ticket) %>
+            <%= link_to 'Details', ticket_path(ticket), class: "btn btn-info" %>
+            <%if ticket.status != "Cancelled"&& ticket.status != "Rejected" && ticket.status != "Confirmed"%>
               <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
               <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-warning", data: { confirm: "Are you sure you want to reject this ticket?" } %>
-              <%end%>
-              <%= link_to "Destroy", ticket_path(ticket), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this cancelled ticket?" } , class:"btn btn-danger " %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-   
+            <%end%>
+            <%= link_to "Destroy", ticket_path(ticket), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this cancelled ticket?" } , class:"btn btn-danger " %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   </table>
+  <div class="d-grid gap-2 col-2 mx-auto">
+    <%=link_to "Back", root_path ,class:"btn btn-primary"%>
+  </div>
 <% else %>
   <h3>No tickets found</h3>
 <% end %>

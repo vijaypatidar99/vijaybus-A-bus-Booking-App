@@ -18,15 +18,15 @@
             <%=link_to "Add Route", new_route_path, class:"nav-link active"%>
           </li>
           <li class="nav-item">
-            <%=link_to "Create Schedule", new_schedule_path, class:"nav-link active"%>
+            <%=link_to " Add Schedule", new_schedule_path, class:"nav-link active"%>
           </li>
           <li class="nav-item">
-            <%=link_to "view Schedules", schedules_path, class:"nav-link active"%>
+            <%=link_to "View Schedules", schedules_path, class:"nav-link active"%>
           </li>
-          <%else%>
-           <li class="nav-item">
-            <%=link_to "Suggestions", '#', class:"nav-link active"%>
+          <li class="nav-item">
+            <%=link_to "View All Buses",buses_all_buses_path, class:"nav-link active"%>
           </li>
+        <%else%>
         <%end%>
       </ul>
       <div class="d-flex" role="search">
@@ -39,16 +39,19 @@
               <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
             <%else%>
               <%= link_to 'My Tickets',my_tickets_path(@user) ,class:"btn btn-primary"%>
-              <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
-              <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Profile
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><%= current_user.email%></li>
-                  <li><%= link_to "Update" , edit_user_registration_path ,class:"btn btn-outline-info"%></li>
+                <ul class="dropdown-menu dropdown-menu-primary">
+                  <li class="dropdown-item"> <%= " welcome "%></li>
+                  <li class="dropdown-item"> <%=current_user.name%></li>
+                  <li class="dropdown-item"><%=current_user.email%></li>
+                  <li class="dropdown-item "><%=link_to "Update Profile",edit_user_registration_path,class:"btn btn-outline-primary"%></li>
+                 <li class="dropdown-item "><%= button_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete ,class:"btn btn-outline-primary"%></li>
                 </ul>
               </div>
+              <%= button_to "Sign out" , destroy_user_session_path, method: :delete ,class:"btn btn-primary"%>
             <%end%>
           <%else%>
             <%= button_to "Sign in" , new_user_session_path, class:"btn btn-primary" %>

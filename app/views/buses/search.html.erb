@@ -13,8 +13,8 @@
           <th>Seat Availability</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
-          <th>Dates Available</th>
-          <th>Actions</th>
+          <th>Dates Available/Actions</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -43,8 +43,8 @@
             <%else%>
               <td> <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
                   <%= f.label :date, "Select a Date" %>
-                  <%= f.select :date, options_for_select(bus.schedules.where(bus_id: bus.id).pluck(:dates).flatten) %></td>
-                <td><%=f.submit "Book Ticket", class:"btn btn-danger"%></td>
+                  <%= f.select :date, options_for_select(bus.schedules.where(bus_id: bus.id).pluck(:dates).flatten) %>
+              <%=f.submit "Book Ticket", class:"btn btn-danger"%></td>
               </tr>
             <%end%>
             <%end%>

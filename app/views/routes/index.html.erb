@@ -19,7 +19,6 @@
               <td><%= route.id %></td>
               <td><%= route.from %></td>
               <td><%= route.to %></td>
-    
               <td>
                 <% if can?(:manage, route) %>
                   <%= link_to "Update Route", edit_route_path(route), class: "btn btn-primary" %>

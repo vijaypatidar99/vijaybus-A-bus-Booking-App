@@ -5,11 +5,13 @@ class BusesController < ApplicationController
   def index
     @route = Route.find(params[:route_id])
     @buses = @route.buses.paginate(page: params[:page])
+
   end
 
-  def show
-    @bus = Bus.find(params[:id])
+  def all_buses
+    @buses = Bus.paginate(page: params[:page])
   end
+
 
   def new
     @bus = Bus.new

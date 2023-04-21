@@ -17,6 +17,7 @@
     <%= f.hidden_field :arrival_time, value: @bus.arrival_time %>
     <div class="form-group">
       <%= f.submit "Save Passenger Details", class: "btn btn-primary" %>
+        <%= link_to "Back", :back ,class:"btn btn-primary"%>
     </div>
   <% end %>
 </div>

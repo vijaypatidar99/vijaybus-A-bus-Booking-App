@@ -1,5 +1,5 @@
-<% if @route.buses.any? %>
-  <h3>Total Buses in this Route (<%= @route.buses.count %>)</h3>
+<% if current_user.try(:admin?)  %>
+  <h3>Total Buses (<%= @buses.count %>)</h3>
   <div class="table-responsive">
     <table class="table table-bordered table-striped">
       <thead>
@@ -14,9 +14,6 @@
           <th>Drop Point</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
-          <% if current_user.try(:admin?)  %>
-            <th>Availability</th>
-          <% end %>
           <th>Actions</th>
         </tr>
       </thead>
@@ -39,24 +36,16 @@
               <td><%= bus.arrival_time %></td>
             <% end %>
             <% if current_user.try(:admin?)  %>
-              <td> <%= select_tag "schedule_date", options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
+              <td> <%= select_tag "schedule_date", options_for_select(bus.schedules.where(bus_id: bus.id).pluck(:dates).flatten) %></td>
               <td>
                 <%= link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Bookings", bus_tickets_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %>
               </td>
-            <% else %>
-              <td>
-                <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
-                  <%= f.label :date, "Select a Date" %>
-                  <%= f.select :date, options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %>
-                  <%= f.submit "Book Ticket", class:"btn btn-danger"%>
-                <% end %>
-              </td>
             <% end %>
-          </td>
-        </tr>
-      <% end %>
+          <% end %>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -68,7 +57,8 @@
 <div class="d-grid gap-2 col-2 mx-auto">
   <%=link_to "Back", root_path ,class:"btn btn-primary"%>
 </div>
+<br>
 <% else %>
-  <h1>No Bus found in this Route</h1>
+  <h1>No Bus found </h1>
   <%= link_to "Back", :back ,class:"btn btn-primary"%>
 <% end %>

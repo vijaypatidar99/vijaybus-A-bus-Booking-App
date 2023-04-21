@@ -8,7 +8,7 @@
               <th>schedule ID</th>
               <th>Route Id</th>
               <th>Bus Id</th>
-               <th>Route</th>
+              <th>Route</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -24,15 +24,18 @@
                     <%= link_to "Update schedule", edit_schedule_path(schedule), class: "btn btn-primary" %>
                     <%= link_to "Delete schedule", schedule_path(schedule), data: {turbo_method: :delete, turbo_confirm: "Are you sure to delete this route?"}, class: "btn btn-danger" %>
                   <% end %>
-                  <%end%>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <ul class="pagination justify-content-center">
-          <%= will_paginate @routes %>
-        </ul>
+                <%end%>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <ul class="pagination justify-content-center">
+        <%= will_paginate @routes %>
+      </ul>
     </div>
-  <% end %>
+    <div class="d-grid gap-2 col-2 mx-auto">
+      <%=link_to "Back", root_path ,class:"btn btn-primary"%>
+    </div>
+  </div>
+<% end %>

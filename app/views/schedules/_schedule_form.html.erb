@@ -10,6 +10,7 @@
     <%= f.label :dates, "Dates (select multiple)" %>
     <%= f.select :dates, options_for_select((Date.today..2.weeks.from_now).map{ |date| [date.to_s, date.to_s] }), {}, multiple: true , class: 'form-control' , required: true %><br>
     <div id="selected-dates"></div>
-    <%= f.submit "Save Schedule", class: "btn btn-primary" %><br>
+    <%= f.submit "Save Schedule", class: "btn btn-primary" %>
+      <%= link_to "Back", root_path ,class:"btn btn-primary"%><br>
   <%end %>
 </div>

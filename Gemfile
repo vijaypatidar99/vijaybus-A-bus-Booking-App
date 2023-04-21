@@ -75,13 +75,13 @@ end
 #gem 'cssbundling-rails'
 gem 'htmlbeautifier'
 gem "devise" 
-gem 'will_paginate'
-gem 'bootstrap-will_paginate'
-
+gem 'will_paginate', '~> 3.3'
+gem 'will_paginate-bootstrap'
 
 #to send email
 gem "letter_opener", group: :development
 gem 'pg'
 gem 'cancancan'
+
 gem 'byebug'
 gem 'bootstrap', '~> 5.1.1'

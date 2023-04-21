@@ -1,6 +1,6 @@
 class Route < ApplicationRecord
   has_many :schedules
-  has_many :buses, :through => :schedules
+  has_many :buses, :through => :schedules ,dependent: :destroy
   validates :from, :to, presence: true
   validate :start_and_end_points_are_unique
   self.per_page = 12

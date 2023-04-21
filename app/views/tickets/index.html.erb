@@ -32,24 +32,23 @@
                   <td><%= ticket.status %></td>
                   <td>
                     <%= link_to 'Details', ticket_path(ticket), class: "btn btn-info" %>
-                    <%if ticket.status != "Cancelled"%>
+                    <%if ticket.status != "Cancelled"&& ticket.status != "Rejected" && ticket.status != "Confirmed"%>
                       <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
                       <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
-                      <%= link_to "Destroy", ticket_path(ticket), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this cancelled ticket?" } , class:"btn btn-danger " %>
                     <%end%>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+                    <%= link_to "Destroy", ticket_path(ticket), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this cancelled ticket?" } , class:"btn btn-danger " %>
+                  <%end%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-      <div class="card-footer text-body-secondary">
-        <% time = Time.now.to_s %>
-        <%= DateTime.parse(time).strftime("%d/%m/%Y  %H:%M") %>
-      </div>
-    <% else %>
-      <p>You have no tickets.</p>
-    <% end %>
+    </div>
+    <div class="d-grid gap-2 col-2 mx-auto">
+      <%=link_to "Back", :back ,class:"btn btn-primary"%>
+    </div>
+  <% else %>
+    <p>You have no tickets.</p>
   </div>
 <% end %>

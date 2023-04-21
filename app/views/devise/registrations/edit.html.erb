@@ -1,9 +1,11 @@
- 
 <div class="col-md-6 col-md-offset-3 container">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="container-md">
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true %></div>
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: 'form-control'%>
@@ -29,9 +31,12 @@
       </div>
       <div class="actions">
         <%= f.submit "Update",class:"btn btn-primary" %>
+         <%= link_to "Back", :back ,class:"btn btn-primary"%>
       </div>
     <% end %>
     <h3>Cancel my account</h3>
-    <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete,class:"btn btn-primary"  %></div>
-    <%= link_to "Back", :back ,class:"btn btn primary"%>
+    <div>Unhappy?
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete ,class:"btn btn-primary" %></div>
+    <br>
+   
   </div>

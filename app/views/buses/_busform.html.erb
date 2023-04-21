@@ -1,27 +1,28 @@
-<div class="card container ">
+<div class="card container my-3 ">
   <%= form_with model: @bus do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :name, "Enter Bus Name" %>
-    <%= f.text_field :name, class: 'form-control' , required: true%>
+    <%= f.text_field :name, class: 'form-control' , required: true%><br>
     <%= f.label :number,"Enter Bus number" %>
     <%= f.text_field :number, class: 'form-control', required: true %><br>
     <%= f.label :bustype,"Select Bus Type "%>
     <%= f.select :bustype,  ['AC' ,'Non-AC', 'Volvo', 'Sleeper' ,'Semi-sleeper','Luxury'], class: 'form-control', required: true%><br>
     <br>
     <%= f.label :price, "Enter Bus Fare" %>
-    <%= f.text_field :price, class: 'form-control' , required: true%>
+    <%= f.text_field :price, class: 'form-control' , required: true%><br>
     <%= f.label :seats, "Enter Available Seats"%>
     <%= f.text_field :seats, class: 'form-control', required: true %><br>
     <br>
     <%= f.label :pickup,"Enter Pickup Point"%>
-    <%= f.text_field :pickup, class: 'form-control', required: true %>
+    <%= f.text_field :pickup, class: 'form-control', required: true %><br>
     <%= f.label :drop,"Enter Drop Point"%>
-    <%= f.text_field :drop, class: 'form-control', required: true %>
+    <%= f.text_field :drop, class: 'form-control', required: true %><br>
     <%= f.label :departure_time,"Enter Departure Time"%>
-    <%= f.text_field :departure_time, class: 'form-control' , required: true%>
+    <%= f.text_field :departure_time, class: 'form-control' , required: true%><br>
     <%= f.label :arrival_time,"Enter Arrival Time"%>
     <%= f.text_field :arrival_time, class: 'form-control', required: true %><br>
-      <%= f.submit "Save Bus", class: "btn btn-primary" %><br>
+      <%= f.submit "Save Bus", class: "btn btn-primary" %>
+        <%= link_to "Back", :back ,class:"btn btn-primary"%> <br>
       <br>
     <%end %>
   </div>
