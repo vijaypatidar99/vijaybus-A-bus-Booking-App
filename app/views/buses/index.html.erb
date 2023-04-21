@@ -9,12 +9,14 @@
           <th>Bus Number</th>
           <th>Bus Type</th>
           <th>Bus Price</th>
-          <th>Seat Availability</th>
+          <th>Seats </th>
           <th>Pickup Point</th>
           <th>Drop Point</th>
           <th>Departure Time</th>
           <th>Arrival Time</th>
-          <th>Availability</th>
+          <% if current_user.try(:admin?)  %>
+            <th>Availability</th>
+          <% end %>
           <th>Actions</th>
         </tr>
       </thead>
@@ -36,20 +38,21 @@
               <td><%= bus.departure_time %></td>
               <td><%= bus.arrival_time %></td>
             <% end %>
-            <% if can?(:manage, bus) %>
-             <td> <%= select_tag "schedule_date", options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
-            <%end%>
-            <td>
-              <% if can?(:manage, bus) %>
+            <% if current_user.try(:admin?)  %>
+              <td> <%= select_tag "schedule_date", options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
+              <td>
                 <%= link_to "Update", edit_bus_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Bookings", bus_tickets_path(bus), class:"btn btn-primary"%>
                 <%= link_to "Destroy", bus_path(bus), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this bus?" } , class:"btn btn-danger" %>
-              <% else %>
+              </td>
+            <% else %>
+              <td>
                 <%= form_with url: new_bus_ticket_path(bus), method: :get do |f| %>
                   <%= f.label :date, "Select a Date" %>
-                  <%= f.select :date, options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %></td>
-                <td><%= f.submit "Book Ticket", class:"btn btn-danger"%></td>
-              <% end %>
+                  <%= f.select :date, options_for_select(bus.schedules.where(route_id: params[:route_id]).pluck(:dates).flatten) %>
+                  <%= f.submit "Book Ticket", class:"btn btn-danger"%>
+                <% end %>
+              </td>
             <% end %>
           </td>
         </tr>

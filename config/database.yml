@@ -81,10 +81,9 @@ test:
   password: password
   timeout: 5000
 
-production:
-  url: <%= ENV['postgres://vijaypatidar:Rf65ClbmCWDLCUQPkoBWcsuiLR2ZkmTA@dpg-cgtf8jd269vbmeu4b33g-a.oregon-postgres.render.com/vijaybus'] %>
 
 production:
-   database: vijaybus
-   username: vijaypatidar
-   password: <%= ENV['Rf65ClbmCWDLCUQPkoBWcsuiLR2ZkmTA'] %>
+  database: vijaybus
+  username: vijaypatidar
+  password: <%= ENV['Rf65ClbmCWDLCUQPkoBWcsuiLR2ZkmTA'] %>
+  url: <%= ENV['postgres://vijaypatidar:Rf65ClbmCWDLCUQPkoBWcsuiLR2ZkmTA@dpg-cgtf8jd269vbmeu4b33g-a.oregon-postgres.render.com/vijaybus'] %>

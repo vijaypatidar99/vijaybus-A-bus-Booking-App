@@ -11,12 +11,13 @@ class TicketsController < ApplicationController
   end
 
   def all_bookings
-    @buses = Bus.all.includes(:tickets)
+    @tickets = Ticket.all.order("id DESC")
+    #@buses = Bus.all.order("id DESC")
   end
 
   def new
     @bus = Bus.find_by(id: params[:bus_id])
-   @schedule = Schedule.find_by(bus_id:@bus.id)
+    @schedule = Schedule.find_by(bus_id: @bus.id)
     if current_user
       @ticket = Ticket.new
     else

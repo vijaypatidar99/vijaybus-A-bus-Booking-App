@@ -1,4 +1,4 @@
-<% if @buses.any? %>
+<% if @tickets.any? %>
   <h3>All Bus Tickets</h3>
   <table class="table table-bordered table-striped">
     <tr>
@@ -11,11 +11,11 @@
       <th>Status</th>
       <th>Actions</th>
     </tr>
-    <% @buses.each do |bus| %>
-      <% bus.tickets.each do |ticket| %>
+    <% @tickets.each do |ticket| %>
+      
         <tr>
           <td><%= ticket.id %></td>
-          <td><%= bus.name %></td>
+          <td><%= ticket.bus.name %></td>
           <td><%= ticket.name %></td>
           <td><%= ticket.age %></td>
           <td><%= ticket.sex %></td>
@@ -24,7 +24,7 @@
           <td>
             <% if can?(:manage, ticket) %>
               <%= link_to 'Details', ticket_path(ticket), class: "btn btn-info" %>
-               <%if ticket.status != "Cancelled"%>
+               <%if ticket.status != "Cancelled"&& ticket.status != "Rejected" && ticket.status != "Confirmed"%>
               <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
               <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-warning", data: { confirm: "Are you sure you want to reject this ticket?" } %>
               <%end%>
@@ -33,7 +33,7 @@
           </td>
         </tr>
       <% end %>
-    <% end %>
+   
   </table>
 <% else %>
   <h3>No tickets found</h3>

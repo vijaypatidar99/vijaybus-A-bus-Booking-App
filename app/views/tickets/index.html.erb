@@ -35,6 +35,7 @@
                     <%if ticket.status != "Cancelled"%>
                       <%= link_to "Approve", bus_ticket_approve_ticket_path(ticket.bus_id, ticket), class: "btn btn-success", data: { confirm: "Are you sure you want to approve this ticket?" } %>
                       <%= link_to "Reject", bus_ticket_reject_ticket_path(ticket.bus_id, ticket), method: :put, class: "btn btn-danger", data: { confirm: "Are you sure you want to reject this ticket?" } %>
+                      <%= link_to "Destroy", ticket_path(ticket), data: {turbo_method: :delete,turbo_confirm: "Are you sure to delete this cancelled ticket?" } , class:"btn btn-danger " %>
                     <%end%>
                   </td>
                 </tr>
