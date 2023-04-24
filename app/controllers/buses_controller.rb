@@ -54,7 +54,7 @@ class BusesController < ApplicationController
       @buses = @buses.where(destination_city: params[:to])
     end
     if params[:dates].present?
-      @schedule = Schedule.all
+     # @schedule = Schedule.all
       @schedule = Schedule.where(dates: params[:dates])
     end
   end
