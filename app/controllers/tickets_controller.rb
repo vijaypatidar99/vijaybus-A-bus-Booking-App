@@ -41,7 +41,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     if @ticket.update(ticket_params)
-      flash[:success] = "detaills updated"
+      flash[:alert] = "detaills updated"
       redirect_to root_path
     else
       render "edit"
@@ -51,7 +51,7 @@ class TicketsController < ApplicationController
   def destroy
     @ticket = Ticket.find(params[:id])
     @ticket.destroy
-    flash[:success] = "Ticket deleted"
+    flash[:alert] = "Ticket deleted"
     redirect_to request.referrer
   end
 
@@ -61,7 +61,7 @@ class TicketsController < ApplicationController
       bus = Bus.find(@ticket.bus.id)
       bus.seats -= 1
       bus.save
-      flash[:success] = "Ticket has been approved."
+      flash[:alert] = "Ticket has been approved."
       redirect_to request.referrer
       TicketMailer.send_email(@ticket).deliver_now
     else
@@ -75,7 +75,7 @@ class TicketsController < ApplicationController
       bus = @ticket.bus
       bus.seats += 1
       bus.save
-      flash[:success] = "Ticket rejected successfully"
+      flash[:alert] = "Ticket rejected successfully"
       redirect_to request.referrer
       TicketMailer.send_email(@ticket).deliver_now
     else

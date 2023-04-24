@@ -5,13 +5,11 @@ class BusesController < ApplicationController
   def index
     @route = Route.find(params[:route_id])
     @buses = @route.buses.paginate(page: params[:page])
-
   end
 
   def all_buses
     @buses = Bus.paginate(page: params[:page])
   end
-
 
   def new
     @bus = Bus.new
@@ -20,7 +18,7 @@ class BusesController < ApplicationController
   def create
     @bus = Bus.new(bus_params)
     if @bus.save
-      flash[:success] = "Bus Added successfully"
+      flash[:alert] = "Bus Added successfully"
       redirect_to root_path
     else
       render "new"
@@ -34,7 +32,7 @@ class BusesController < ApplicationController
   def update
     @bus = Bus.find(params[:id])
     if @bus.update(bus_params)
-      flash[:success] = "Bus updated"
+      flash[:alert] = "Bus updated"
       redirect_to root_path
     else
       render "edit"
@@ -43,7 +41,7 @@ class BusesController < ApplicationController
 
   def destroy
     Bus.find(params[:id]).destroy
-    flash[:success] = "Bus deleted"
+    flash[:alert] = "Bus deleted"
     redirect_to request.referrer
   end
 

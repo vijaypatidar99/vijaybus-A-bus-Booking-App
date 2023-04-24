@@ -12,7 +12,7 @@ class RoutesController < ApplicationController
   def create
     @route = Route.new(route_params)
     if @route.save
-      flash[:success] = "Route Added Successfully"
+      flash[:alert] = "Route Added Successfully"
       redirect_to root_path
     else
       render "new"
@@ -31,7 +31,7 @@ class RoutesController < ApplicationController
   def update
     @route = Route.find(params[:id])
     if @route.update(route_params)
-      flash[:success] = "Route updated"
+      flash[:alert] = "Route updated"
       redirect_to root_path
     else
       render "edit"
@@ -40,7 +40,7 @@ class RoutesController < ApplicationController
 
   def destroy
     Route.find(params[:id]).destroy
-    flash[:success] = "Route deleted"
+    flash[:alert] = "Route deleted"
     redirect_to request.referrer
   end
 
